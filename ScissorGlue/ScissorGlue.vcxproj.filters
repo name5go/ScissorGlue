@@ -14,12 +14,26 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="ソース ファイル\Aplication">
-      <UniqueIdentifier>{c8dc24c9-ee34-4f7d-9f46-39ba3b388781}</UniqueIdentifier>
+      <UniqueIdentifier>{b03c4921-f51e-4f86-b01c-2739fe841ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math">
+      <UniqueIdentifier>{9a944a44-8343-4c06-8c1a-ceb40152963e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Math">
+      <UniqueIdentifier>{a0456298-eaeb-4744-a1fd-e869f5062b2f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\!_Source\Aplication\winmain.cpp">
       <Filter>ソース ファイル\Aplication</Filter>
     </ClCompile>
+    <ClCompile Include="..\!_Source\Math\Math.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\!_Source\Math\Math.h">
+      <Filter>ヘッダー ファイル\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
