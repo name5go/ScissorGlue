@@ -19,11 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\!_Source\Aplication\winmain.cpp" />
-    <ClCompile Include="..\!_Source\Math\Math.cpp" />
+    <ClCompile Include="!_Source\Aplication\Winmain.cpp" />
+    <ClCompile Include="!_Source\Collision\Collision.cpp" />
+    <ClCompile Include="!_Source\Game\Game.cpp" />
+    <ClCompile Include="!_Source\Math\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\!_Source\Math\Math.h" />
+    <ClInclude Include="!_Source\Aplication\Winmain.h" />
+    <ClInclude Include="!_Source\Collision\Collision.h" />
+    <ClInclude Include="!_Source\Game\Game.h" />
+    <ClInclude Include="!_Source\Math\Math.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

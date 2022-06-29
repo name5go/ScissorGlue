@@ -16,23 +16,47 @@
     <Filter Include="ソース ファイル\Aplication">
       <UniqueIdentifier>{b03c4921-f51e-4f86-b01c-2739fe841ba5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Math">
-      <UniqueIdentifier>{9a944a44-8343-4c06-8c1a-ceb40152963e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\Math">
       <UniqueIdentifier>{a0456298-eaeb-4744-a1fd-e869f5062b2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Colision">
+      <UniqueIdentifier>{a286763b-8915-4787-9247-40cc0363e819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Collision">
+      <UniqueIdentifier>{6b0e036a-d182-4e31-a8b2-0baf158a63e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Aplication">
+      <UniqueIdentifier>{8b631d34-01ef-4f1b-ac79-9ec892aadf56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math">
+      <UniqueIdentifier>{b1a29df2-648d-4c35-b24a-54da27b376bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\!_Source\Aplication\winmain.cpp">
+    <ClCompile Include="!_Source\Game\Game.cpp">
       <Filter>ソース ファイル\Aplication</Filter>
     </ClCompile>
-    <ClCompile Include="..\!_Source\Math\Math.cpp">
+    <ClCompile Include="!_Source\Aplication\Winmain.cpp">
+      <Filter>ソース ファイル\Aplication</Filter>
+    </ClCompile>
+    <ClCompile Include="!_Source\Collision\Collision.cpp">
+      <Filter>ソース ファイル\Colision</Filter>
+    </ClCompile>
+    <ClCompile Include="!_Source\Math\Math.cpp">
       <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\!_Source\Math\Math.h">
+    <ClInclude Include="!_Source\Game\Game.h">
+      <Filter>ヘッダー ファイル\Aplication</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\Aplication\Winmain.h">
+      <Filter>ヘッダー ファイル\Aplication</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\Collision\Collision.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\Math\Math.h">
       <Filter>ヘッダー ファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>

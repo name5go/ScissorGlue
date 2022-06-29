@@ -7,7 +7,7 @@
  *********************************************************************/
 
 #include<DxLib.h>
-
+#include"../Aplication/Game.h"
 
 int CALLBACK winmain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 	OutputDebugString("---Winmain開始---\n");
@@ -20,7 +20,7 @@ int CALLBACK winmain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	//描画先画面を裏にする
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	//いろいろクラスを突っ込むところ
+	//ゲームクラスを作りたい
 
 	//ゲームのメインループescapeで終了
 	while (ProcessMessage() != -1) {
