@@ -13,15 +13,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\Aplication">
+      <UniqueIdentifier>{c8dc24c9-ee34-4f7d-9f46-39ba3b388781}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\!_sources\winmain\winmain.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\!_Source\Aplication\winmain.cpp">
+      <Filter>ソース ファイル\Aplication</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\!_sources\winmain\winmain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
