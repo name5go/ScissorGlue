@@ -7,27 +7,47 @@
  *********************************************************************/
 
 #include<DxLib.h>
-#include"../Aplication/Game.h"
+#include <stdio.h>
+#include <time.h>
+#include<memory>
+#include"Game.h"
 
+
+//エントリーポイント
 int CALLBACK winmain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 	OutputDebugString("---Winmain開始---\n");
+
 	//ウィンドウモード変更
 	ChangeWindowMode(TRUE);
+	
 	//画面解像度を1920x1080でカラービット数を32bitに設定
-	SetGraphMode(1920, 1080, 32);
+	SetGraphMode(wScreen,hScreen , depthScreen);
+	
 	//DXライブラリを初期化
 	DxLib_Init();
+	
 	//描画先画面を裏にする
 	SetDrawScreen(DX_SCREEN_BACK);
-
-	//ゲームクラスを作りたい
-
+	
+	// 乱数初期化
+	srand((unsigned int)time(NULL));
+	
+	
+	//ゲームクラスのポインタ作成
+	auto pGame = std::make_unique<Game>();
+	
+	
 	//ゲームのメインループescapeで終了
 	while (ProcessMessage() != -1) {
 		if (CheckHitKey(KEY_INPUT_ESCAPE)) {
 			break;
 		}
-
-		//クラスつっこむ
+//クラスつっこむ
+		pGame->Input;//入力
+		pGame->Process;//計算
+		pGame->Draw;//描画
 	}
+	// Dxライブラリ終了
+	DxLib_End();
+	return 0;
 }

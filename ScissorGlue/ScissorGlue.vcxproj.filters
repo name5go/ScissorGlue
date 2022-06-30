@@ -31,11 +31,14 @@
     <Filter Include="ソース ファイル\Math">
       <UniqueIdentifier>{b1a29df2-648d-4c35-b24a-54da27b376bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object">
+      <UniqueIdentifier>{4e875824-b304-4fe3-a219-fc3df1446cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object">
+      <UniqueIdentifier>{f11ff212-a88d-445f-88ab-c7ac20e894d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="!_Source\Game\Game.cpp">
-      <Filter>ソース ファイル\Aplication</Filter>
-    </ClCompile>
     <ClCompile Include="!_Source\Aplication\Winmain.cpp">
       <Filter>ソース ファイル\Aplication</Filter>
     </ClCompile>
@@ -45,19 +48,31 @@
     <ClCompile Include="!_Source\Math\Math.cpp">
       <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
+    <ClCompile Include="!_Source\Aplication\Game.cpp">
+      <Filter>ソース ファイル\Aplication</Filter>
+    </ClCompile>
+    <ClCompile Include="!_Source\Object\ObjectServer.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="!_Source\Object\ObjectBase.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="!_Source\Game\Game.h">
-      <Filter>ヘッダー ファイル\Aplication</Filter>
-    </ClInclude>
-    <ClInclude Include="!_Source\Aplication\Winmain.h">
-      <Filter>ヘッダー ファイル\Aplication</Filter>
-    </ClInclude>
     <ClInclude Include="!_Source\Collision\Collision.h">
       <Filter>ヘッダー ファイル\Collision</Filter>
     </ClInclude>
     <ClInclude Include="!_Source\Math\Math.h">
       <Filter>ヘッダー ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\Aplication\Game.h">
+      <Filter>ヘッダー ファイル\Aplication</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\Object\ObjectServer.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\Object\ObjectBase.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
