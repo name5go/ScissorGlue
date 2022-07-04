@@ -14,14 +14,15 @@
 
 
 //エントリーポイント
-int CALLBACK winmain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
 	OutputDebugString("---Winmain開始---\n");
 
 	//ウィンドウモード変更
 	ChangeWindowMode(TRUE);
 	
 	//画面解像度を1920x1080でカラービット数を32bitに設定
-	SetGraphMode(wScreen,hScreen , depthScreen);
+	SetGraphMode(wScreen, hScreen, depthScreen);
 	
 	//DXライブラリを初期化
 	DxLib_Init();
@@ -38,11 +39,13 @@ int CALLBACK winmain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	
 	
 	//ゲームのメインループescapeで終了
-	while (ProcessMessage() != -1) {
-		if (CheckHitKey(KEY_INPUT_ESCAPE)) {
+	while (ProcessMessage() != -1)
+	{
+		if (CheckHitKey(KEY_INPUT_ESCAPE))
+		{
 			break;
 		}
-//クラスつっこむ
+//各種命令ぶっこみ
 		pGame->Input;//入力
 		pGame->Process;//計算
 		pGame->Draw;//描画

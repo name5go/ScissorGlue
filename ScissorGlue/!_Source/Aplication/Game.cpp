@@ -16,10 +16,10 @@ Game::Game():
 	gFrameCount(0)
 {
 	//jsonからマップデータを読み取る
-	mapChips.LoadJson("map01.jason")
 
-		//playerを作ってオブジェクトサーバーに登録
-	objectServer.Add(new Player());
+
+	//playerを作ってオブジェクトサーバーに登録
+
 }
 
 //デストラクタ
@@ -35,15 +35,10 @@ void Game::Input() {
 
 //計算
 void Game::Process() {
-	objectServer.Process(*this);
-	mapChips.Process(*this)
+
 }
 
 //描画
-void Game::Drae() {
-	CleaDrawScreen();
-	backGround.Draw();
-	mapChips.Draw();
-	objectServer.Draw();
-	ScreenFlip();
+void Game::Draw() {
+
 }
