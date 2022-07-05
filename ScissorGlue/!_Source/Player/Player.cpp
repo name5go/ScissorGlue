@@ -22,7 +22,7 @@ Player::Player(Game& pGame) :
 	turnPlayerFlag(FALSE)//プレイヤーの反転フラグ
 {
 	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換えるの忘れない
-	gh = LoadGraph("ScissorGlue / !_Resources / !_Pic / player / ball.png");
+	gh = LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
 }
 
 //デストラクタ
@@ -66,21 +66,26 @@ void Player::Input()
 
 }
 
-//更新
-void Player::Update()
-{
-
-
-	//慣性とその減速
-	if (inertiaPlayer > 0)
-	{
-		inertiaPlayer -= 1;
-	}
-
-}
-
 //描画
 void Player::Render()
 {
 	DrawRotaGraph(xPlayer, yPlayer, sizePlayer, anglePlayer, gh, TRUE, turnPlayerFlag);
+}
+
+
+//更新
+void Player::Update()
+{
+	//重力
+	if(yPlayer<1000)
+	{
+		yPlayer += 1;
+	}
+
+	//慣性とその減速
+	if (inertiaPlayer > 0&& yPlayer < 1000)
+	{
+		inertiaPlayer -= 1;
+	}
+
 }

@@ -39,6 +39,9 @@
     <ClInclude Include="!_Source\Object\SoundServer.h" />
     <ClInclude Include="!_Source\Player\Player.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\ball.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
