@@ -21,14 +21,17 @@ public:
 	Game();//コンストラクタ
 	~Game();//デストラクタ
 
+
+
 	//関数
 	void Input();//入力
-	void Process();//計算
-	void Draw();//描画
+	void Update();//計算
+	void Render();//描画
+	void CreateKeyTrg();
 
 	//メンバ変数宣言
 	int gKey;
 	int gTrg;
 	int gFrameCount;
-
+	int gh;
 };

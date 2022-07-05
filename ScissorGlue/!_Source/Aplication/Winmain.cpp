@@ -14,7 +14,8 @@
 
 
 //エントリーポイント
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(
+	_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,_In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
 	OutputDebugString("---Winmain開始---\n");
 
@@ -34,7 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	srand((unsigned int)time(NULL));
 	
 	
-	//ゲームクラスのポインタ作成
+	//ゲームクラスのポインタ生成
 	auto pGame = std::make_unique<Game>();
 	
 	
@@ -46,9 +47,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			break;
 		}
 //各種命令ぶっこみ
-		pGame->Input;//入力
-		pGame->Process;//計算
-		pGame->Draw;//描画
+		pGame->Input();//入力
+		pGame->Update();//計算
+		ClearDrawScreen();
+		pGame->Render();//描画
+		ScreenFlip();
 	}
 	// Dxライブラリ終了
 	DxLib_End();

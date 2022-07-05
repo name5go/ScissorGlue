@@ -1,13 +1,11 @@
+#pragma once
 /*****************************************************************//**
  * \file   Math.h
- * \brief  計算に使うやつ授業素材丸コピ
+ * \brief  計算部分
  * 
  * \author めざし
- * \date   June 2022
+ * \date   July 2022
  *********************************************************************/
-
-#pragma once
-
 #include <cmath>
 #include <limits>
 #include <array>
@@ -51,10 +49,17 @@ public:
 	double x, y;
 	// コンストラクタ
 	Vector2() noexcept = default;
-	constexpr Vector2(double inX, double inY) noexcept
-    : x{inX}
-    , y{inY} {
+	constexpr Vector2(double ax, double ay) noexcept
+    : x{ax}
+    , y{ay} {
   }
+	constexpr Vector2(int ax, int ay) noexcept
+		: x{static_cast<double>(ax)}
+		, y{static_cast<double>(ay)} {
+	}
+  int IntX() { return static_cast<int>(x); }
+  int IntY() { return static_cast<int>(y); }
+
 	// ベクトルの加算 a + b ※外部関数
 	friend Vector2 operator+(const Vector2& a, const Vector2& b) {
 		return { a.x + b.x, a.y + b.y };
@@ -96,8 +101,16 @@ public:
 	// ベクトルの正規化
 	void Normalize() {
 		auto length = Length();
-		x /= length;
-		y /= length;
+
+    // 誤差未満ならゼロとみなす。
+    if (std::abs(length) < std::numeric_limits<double>::epsilon()) {
+      x = 0.0;
+      y = 0.0;
+    }
+    else {
+      x /= length;
+      y /= length;
+    }
 	}
 	static Vector2 Normalize(const Vector2& vec) {
 		auto temp = vec;
@@ -117,11 +130,12 @@ public:
 	static Vector2 Transform(const Vector2& vec, const class Matrix3& mat, double w = 1.0f);
 };
 
-// (1-1)行列クラス
+// 3次行列クラス
 class Matrix3 {
 public:
 	// 3列×3行
 	std::array<std::array<double, 3>, 3> m;
+
 	constexpr Matrix3() {
 		*this = Matrix3::Identity;
 	}
@@ -134,8 +148,9 @@ public:
          m10, m11, m12,
          m20, m21, m22 }
 	{}
+	friend static Vector2 Vector2::Transform(const Vector2& vec, const Matrix3& mat, double w);
 
-	// (3)行列の乗算
+	// 行列の乗算
 	friend Matrix3 operator*(const Matrix3& l, const Matrix3& r) {
 		return {
 			// row 0
@@ -156,21 +171,21 @@ public:
 		*this = *this * right;
 		return *this;
 	}
-	// (1-2)回転行列の作成
+	// 回転行列の作成
 	static Matrix3 CreateRotation(double theta) {
 		using std::sin;	using std::cos;
 		return {
-			cos(theta), sin(theta), 0.0f,
-			-sin(theta), cos(theta), 0.0f,
-			0.0f, 0.0f, 1.0f,
+			cos(theta), sin(theta), 0.0,
+			-sin(theta), cos(theta), 0.0,
+			0.0, 0.0, 1.0,
 		};
 	}
-	// (1-3)拡縮行列の作成
+	// 拡縮行列の作成
 	static Matrix3 CreateScale(double xScale, double yScale) {
 		return {
-			xScale, 0.0f, 0.0f,
-			0.0f, yScale, 0.0f,
-			0.0f, 0.0f, 1.0f,
+			xScale, 0.0, 0.0,
+			0.0f, yScale, 0.0,
+			0.0, 0.0, 1.0,
 		};
 	}
 	static Matrix3 CreateScale(const Vector2& scaleVector) {
@@ -179,7 +194,7 @@ public:
 	static Matrix3 CreateScale(double scale) {
 		return CreateScale(scale, scale);
 	}
-	// (1-4.)平行移動行列の作成
+	// 平行移動行列の作成
 	static Matrix3 CreateTranslation(const Vector2& trans) {
 		return {
 			1.0, 0.0, 0.0,
@@ -190,36 +205,54 @@ public:
 	// 単位行列
 	static const Matrix3 Identity;
 };
-
+// 矩形クラス
+class Rect {
+public:
+	Rect(const Vector2& lt, const Vector2& rb)
+		:leftTop{lt}
+		,rightBottom{rb}
+	{
+	}
+	Vector2 GetLeftTop(){ return leftTop; }
+	Vector2 GetRightBottom(){ return rightBottom; }
+	double GetWidth() { return rightBottom.x - leftTop.x; }
+	double GetHeight() { return rightBottom.y - leftTop.y; }
+private:
+	Vector2 leftTop;			// 矩形の左上
+	Vector2 rightBottom;	// 矩形の右下
+};
 namespace MyLib {
-	inline void DrawModiGraph(
+	inline void RenderModiGraph(
 		double x1, double y1,
 		double x2, double y2,
 		double x3, double y3,
 		double x4, double y4,
 		int grHandle, bool transFlag) {
-		DxLib::DrawModiGraph(
+		DxLib::RenderModiGraph(
 			static_cast<int>(x1), static_cast<int>(y1),
 			static_cast<int>(x2), static_cast<int>(y2),
 			static_cast<int>(x3), static_cast<int>(y3),
 			static_cast<int>(x4), static_cast<int>(y4), grHandle, transFlag);
 	}
-	inline void DrawModiGraph(
+	inline void RenderModiGraph(
 		Vector2& lt, Vector2& rt,
 		Vector2& rb, Vector2& lb,
 		int grHandle, bool transFlag) {
-		DxLib::DrawModiGraph(
+		DxLib::RenderModiGraph(
 			static_cast<int>(lt.x), static_cast<int>(lt.y),
 			static_cast<int>(rt.x), static_cast<int>(rt.y),
 			static_cast<int>(rb.x), static_cast<int>(rb.y),
 			static_cast<int>(lb.x), static_cast<int>(lb.y), grHandle, transFlag);
 	}
-	// (4-1)回転拡縮並行移動行列を使って描画する
-	inline void DrawModiGraph(const Vector2& position, double zoom, double angle, int width, int height, int rgHandle) {
+	// 回転拡縮並行移動行列を使って描画する
+	inline void RenderModiGraph(const Matrix3& view, const Vector2& position, const Vector2& scale, double angle, int width, int height, int rgHandle) {
 		// 回転×拡縮×並行移動
 		Matrix3 m = Matrix3::CreateRotation(angle);
-		m *= Matrix3::CreateScale(zoom);
+		m *= Matrix3::CreateScale(scale);
 		m *= Matrix3::CreateTranslation(position);
+
+		m *= view;
+
 		// 描画する画像の4つの頂点座標
 		std::array<Vector2, 4> pos = {
 			Vector2{-width / 2.0, -height / 2.0 },	// 左上から右回り
@@ -237,6 +270,9 @@ namespace MyLib {
 			v = Vector2::Transform(v, m);
 		}
 		// 変換した座標で描画する
-		MyLib::DrawModiGraph(pos[0], pos[1], pos[2], pos[3], rgHandle, true);
+		MyLib::RenderModiGraph(pos[0], pos[1], pos[2], pos[3], rgHandle, true);
+	}
+	inline void RenderModiGraph(const Matrix3& view, const Vector2& position, double zoom, double angle, int width, int height, int rgHandle) {
+		MyLib::RenderModiGraph(view, position, {zoom, zoom}, angle, width, height, rgHandle);
 	}
 };
