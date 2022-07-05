@@ -9,6 +9,10 @@
 #pragma once
 
 #include<DxLib.h>
+#include<memory>
+#include"../Player/Player.h"
+
+class Player;
 
 //画面設定
 constexpr auto wScreen = 1920;		//< 画面の横解像度
@@ -20,8 +24,8 @@ class Game {
 public:
 	Game();//コンストラクタ
 	~Game();//デストラクタ
-
-
+	
+	std::unique_ptr<Player>pPlayer;
 
 	//関数
 	void Input();//入力
@@ -33,5 +37,4 @@ public:
 	int gKey;
 	int gTrg;
 	int gFrameCount;
-	int gh;
 };

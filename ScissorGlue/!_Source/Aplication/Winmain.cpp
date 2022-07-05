@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <time.h>
 #include<memory>
-#include"Game.h"
+#include"../Aplication/Game.h"
 
 
 //エントリーポイント
