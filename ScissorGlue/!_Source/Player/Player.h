@@ -10,7 +10,8 @@
 
 class Game;
 
-class Player {
+class Player
+{
 public:
 	//コンストラクタ
 	Player(Game& pGame);
@@ -33,8 +34,11 @@ private:
 	float sizePlayer;//同描画拡大率
 	int inertiaPlayer;//プレイヤーの加速度
 	int inertiaMax;//最大速度というか内部蓄積慣性の最大値
+	int standFlag;//地面接触フラグ
+	int gravityPlayer;//重力
 	
-
+	
+	
 
 	bool turnPlayerFlag;//プレイヤーの反転描画オンオフ
 

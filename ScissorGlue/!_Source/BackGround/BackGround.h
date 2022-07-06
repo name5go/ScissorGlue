@@ -1,13 +1,15 @@
 #pragma once
 /*****************************************************************//**
- * \file   ImageServere.h
- * \brief  ‰æ‘œ“Ç‚İ‚İ‚ğ‚Ô‚ñ‰ñ‚·‚â‚Â
+ * \file   BackGround.h
+ * \brief  ”wŒiˆ—
  * 
  * \author ‚ß‚´‚µ
  * \date   July 2022
  *********************************************************************/
 
-class ImageServer{
-public:
-	
+
+class BackGround
+{
+
+
 };

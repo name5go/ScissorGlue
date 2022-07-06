@@ -11,6 +11,7 @@
 #include<DxLib.h>
 #include<memory>
 #include"../Player/Player.h"
+#include	"../Object/ObjectServer.h"
 
 class Player;
 
@@ -20,7 +21,8 @@ constexpr auto hScreen = 1080;		//< 画面の縦解像度
 constexpr auto depthScreen = 32;   ///< １ドットあたりのビット数
 
 //ゲームクラス
-class Game {
+class Game 
+{
 public:
 	Game();//コンストラクタ
 	~Game();//デストラクタ

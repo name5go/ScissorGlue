@@ -9,6 +9,7 @@
 #include<DxLib.h>
 #include"Player.h"
 #include"Math.h"
+#include"../Object/ResourceServer.h"
 
 //コンストラクタ
 Player::Player(Game& pGame) :
@@ -16,13 +17,16 @@ Player::Player(Game& pGame) :
 	//Playerメンバ変数の初期化
 	xPlayer(0), yPlayer(0),//プレイヤー座標を0,0で初期化
 	inertiaPlayer(0),//プレイヤーの慣性
-	inertiaMax(30),//最大速度
+	gravityPlayer(0),
+	inertiaMax(20),//最大速度
 	sizePlayer(1.0),//プレイヤーの描画倍率
 	anglePlayer(0.0),//プレイヤーの角度
-	turnPlayerFlag(FALSE)//プレイヤーの反転フラグ
+	turnPlayerFlag(FALSE),//プレイヤーの反転フラグ
+	standFlag(0)
+
 {
-	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換えるの忘れない
-	gh = LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
+	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換える
+	gh = ResourceServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
 }
 
 //デストラクタ
@@ -33,6 +37,7 @@ Player::~Player()
 //入力
 void Player::Input()
 {
+//WASDの入力を登録
 	constexpr auto A_KEY = PAD_INPUT_4;
 	constexpr auto D_KEY = PAD_INPUT_6;
 	constexpr auto W_KEY = PAD_INPUT_8;
@@ -43,27 +48,28 @@ void Player::Input()
 	if(g.gKey&PAD_INPUT_LEFT||g.gKey&A_KEY)
 	{
 		//ボタンを押された時の処理
-		//加速が最大速度以下なら増やし続ける
-		if(inertiaPlayer<inertiaMax)
-		{
-			inertiaPlayer += 2;
-		}
-
+		turnPlayerFlag = FALSE;
+			inertiaPlayer -= 3;
 	}
 
 	//右押されてたら右方向
-	if (g.gKey & PAD_INPUT_RIGHT || g.gKey & D_KEY)
+	if (g.gKey & PAD_INPUT_RIGHT||g.gKey&D_KEY )
 	{
 		//ボタンを押された時の処理
 		//描画の反転をオン
-		//加速が最大速度以下なら増やし続ける
 		turnPlayerFlag = TRUE;
-		if (inertiaPlayer < inertiaMax)
-		{
-			inertiaPlayer += 2;
-		}
+		inertiaPlayer += 3;
 	}
 
+	//g.gKey & PAD_INPUT_A ||
+	//ジャンプ
+	if (g.gTrg & W_KEY)
+	{
+		if(standFlag==1)
+		{
+			gravityPlayer = -25;
+		}
+	}
 }
 
 //描画
@@ -76,16 +82,43 @@ void Player::Render()
 //更新
 void Player::Update()
 {
-	//重力
-	if(yPlayer<1000)
+	//座標の反映
+	xPlayer += inertiaPlayer;
+	yPlayer += gravityPlayer;
+
+	//重力処理
+if (yPlayer > 1000)
 	{
-		yPlayer += 1;
+		gravityPlayer = 0;
+		standFlag = 1;
+	}
+	else
+	{
+		standFlag = 0;
+		gravityPlayer += 1;
+	
 	}
 
-	//慣性とその減速
-	if (inertiaPlayer > 0&& yPlayer < 1000)
-	{
-		inertiaPlayer -= 1;
-	}
+
+//減速処理時間に余裕あるならベクトルとか絶対値基準で書き直したい
+if (inertiaPlayer < 0)
+{
+	inertiaPlayer += 1;
+}
+if (inertiaPlayer > 0)
+{
+	inertiaPlayer -= 1;
+}
+
+//最大速度の処理これも時間があればベクトルで書き換えたい
+if (inertiaPlayer > inertiaMax)
+{
+	inertiaPlayer = inertiaMax;
+}
+if (inertiaPlayer < -1 * inertiaMax)
+{
+	inertiaPlayer = -1 * inertiaMax;
+}
+
 
 }

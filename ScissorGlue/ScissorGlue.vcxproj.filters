@@ -43,6 +43,12 @@
     <Filter Include="ヘッダー ファイル\Player">
       <UniqueIdentifier>{600babcd-eacc-4609-ab77-02cc507634ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\BackGround">
+      <UniqueIdentifier>{e6aa145f-07c4-448a-955d-cc38359bfe99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\BackGround">
+      <UniqueIdentifier>{6702acba-22bb-4a30-a108-242b6c702917}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="!_Source\Aplication\Winmain.cpp">
@@ -60,7 +66,7 @@
     <ClCompile Include="!_Source\Player\Player.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
-    <ClCompile Include="!_Source\Object\ImageServer.cpp">
+    <ClCompile Include="!_Source\Object\ResourceServer.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="!_Source\Object\SoundServer.cpp">
@@ -71,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="!_Source\Math\Math.cpp">
       <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="!_Source\BackGround\BackGround.cpp">
+      <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +95,7 @@
     <ClInclude Include="!_Source\Player\Player.h">
       <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
-    <ClInclude Include="!_Source\Object\ImageServere.h">
+    <ClInclude Include="!_Source\Object\ResourceServere.h">
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="!_Source\Object\SoundServer.h">
@@ -98,10 +107,8 @@
     <ClInclude Include="!_Source\Math\Math.h">
       <Filter>ヘッダー ファイル\Math</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\ball.png">
-      <Filter>リソース ファイル</Filter>
-    </Image>
+    <ClInclude Include="!_Source\BackGround\BackGround.h">
+      <Filter>ヘッダー ファイル\BackGround</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

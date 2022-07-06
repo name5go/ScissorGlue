@@ -21,9 +21,10 @@
   <ItemGroup>
     <ClCompile Include="!_Source\Aplication\Game.cpp" />
     <ClCompile Include="!_Source\Aplication\Winmain.cpp" />
+    <ClCompile Include="!_Source\BackGround\BackGround.cpp" />
     <ClCompile Include="!_Source\Collision\Collision.cpp" />
     <ClCompile Include="!_Source\Math\Math.cpp" />
-    <ClCompile Include="!_Source\Object\ImageServer.cpp" />
+    <ClCompile Include="!_Source\Object\ResourceServer.cpp" />
     <ClCompile Include="!_Source\Object\ObjectBase.cpp" />
     <ClCompile Include="!_Source\Object\ObjectServer.cpp" />
     <ClCompile Include="!_Source\Object\SoundServer.cpp" />
@@ -31,16 +32,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="!_Source\Aplication\Game.h" />
+    <ClInclude Include="!_Source\BackGround\BackGround.h" />
     <ClInclude Include="!_Source\Collision\Collision.h" />
     <ClInclude Include="!_Source\Math\Math.h" />
-    <ClInclude Include="!_Source\Object\ImageServere.h" />
+    <ClInclude Include="!_Source\Object\ResourceServere.h" />
     <ClInclude Include="!_Source\Object\ObjectBase.h" />
     <ClInclude Include="!_Source\Object\ObjectServer.h" />
     <ClInclude Include="!_Source\Object\SoundServer.h" />
     <ClInclude Include="!_Source\Player\Player.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\ball.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -29,7 +29,7 @@ void Game::Input() {
 	//キーのトリガ情報生成
 	CreateKeyTrg();
 
-	pPlayer->Update();
+	pPlayer->Input();
 }
 
 //計算
