@@ -19,6 +19,7 @@ Game::Game():
 {
 	 pPlayer = std::make_unique<Player>(*this);
 //画像周りの読み込み処理つっこみたい
+	 _mapChips.LoadJson("res/", "platformer_simpleA.json");
 }
 
 //デストラクタ
