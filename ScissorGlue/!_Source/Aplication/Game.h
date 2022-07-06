@@ -13,7 +13,7 @@
 #include"../Player/Player.h"
 #include	"../Object/ObjectServer.h"
 #include	"../BackGround/BackGround.h"
-#include	"../BackGround/MapChips.h"
+#include	"../Map/MapChips.h"
 
 class Player;
 

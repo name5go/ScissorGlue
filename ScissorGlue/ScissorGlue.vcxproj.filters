@@ -49,6 +49,12 @@
     <Filter Include="ソース ファイル\Map">
       <UniqueIdentifier>{e6aa145f-07c4-448a-955d-cc38359bfe99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\BackGround">
+      <UniqueIdentifier>{88975402-2228-4166-806f-657ffed39035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\BackGround">
+      <UniqueIdentifier>{81382926-a549-4b9d-ac81-b859e7db7aaa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="!_Source\Aplication\Winmain.cpp">
@@ -78,11 +84,11 @@
     <ClCompile Include="!_Source\Math\Math.cpp">
       <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="!_Source\BackGround\MapChips.cpp">
+    <ClCompile Include="!_Source\Map\MapChips.cpp">
       <Filter>ソース ファイル\Map</Filter>
     </ClCompile>
-    <ClCompile Include="!_Source\Map\BackGround.cpp">
-      <Filter>ソース ファイル\Map</Filter>
+    <ClCompile Include="!_Source\BackGround\BackGround.cpp">
+      <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,11 +116,11 @@
     <ClInclude Include="!_Source\Math\Math.h">
       <Filter>ヘッダー ファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="!_Source\Map\BackGround.h">
+    <ClInclude Include="!_Source\Map\MapChips.h">
       <Filter>ヘッダー ファイル\Map</Filter>
     </ClInclude>
-    <ClInclude Include="!_Source\BackGround\MapChips.h">
-      <Filter>ヘッダー ファイル\Map</Filter>
+    <ClInclude Include="!_Source\BackGround\BackGround.h">
+      <Filter>ヘッダー ファイル\BackGround</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

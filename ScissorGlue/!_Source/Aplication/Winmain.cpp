@@ -29,7 +29,7 @@ int WINAPI WinMain(
 	DxLib_Init();
 	
 	//•`‰ææ‰æ–Ê‚ð— ‚É‚·‚é
-	SetDraSCREEN_W(DX_SCREEN_BACK);
+	SetDrawScreen(DX_SCREEN_BACK);
 	
 	// —”‰Šú‰»
 	srand((unsigned int)time(NULL));
@@ -49,7 +49,7 @@ int WINAPI WinMain(
 //ŠeŽí–½—ß‚Ô‚Á‚±‚Ý
 		pGame->Input();//“ü—Í
 		pGame->Update();//ŒvŽZ
-		ClearDraSCREEN_W();
+		ClearDrawScreen();
 		pGame->Render();//•`‰æ
 		ScreenFlip();
 	}

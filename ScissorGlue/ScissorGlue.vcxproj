@@ -21,9 +21,9 @@
   <ItemGroup>
     <ClCompile Include="!_Source\Aplication\Game.cpp" />
     <ClCompile Include="!_Source\Aplication\Winmain.cpp" />
-    <ClCompile Include="!_Source\BackGround\MapChips.cpp" />
+    <ClCompile Include="!_Source\BackGround\BackGround.cpp" />
     <ClCompile Include="!_Source\Collision\Collision.cpp" />
-    <ClCompile Include="!_Source\Map\BackGround.cpp" />
+    <ClCompile Include="!_Source\Map\MapChips.cpp" />
     <ClCompile Include="!_Source\Math\Math.cpp" />
     <ClCompile Include="!_Source\Object\ResourceServer.cpp" />
     <ClCompile Include="!_Source\Object\ObjectBase.cpp" />
@@ -33,9 +33,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="!_Source\Aplication\Game.h" />
-    <ClInclude Include="!_Source\BackGround\MapChips.h" />
+    <ClInclude Include="!_Source\BackGround\BackGround.h" />
     <ClInclude Include="!_Source\Collision\Collision.h" />
-    <ClInclude Include="!_Source\Map\BackGround.h" />
+    <ClInclude Include="!_Source\Map\MapChips.h" />
     <ClInclude Include="!_Source\Math\Math.h" />
     <ClInclude Include="!_Source\Object\ResourceServer.h" />
     <ClInclude Include="!_Source\Object\ObjectBase.h" />
