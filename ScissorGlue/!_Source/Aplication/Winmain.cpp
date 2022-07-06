@@ -23,13 +23,13 @@ int WINAPI WinMain(
 	ChangeWindowMode(TRUE);
 	
 	//画面解像度を1920x1080でカラービット数を32bitに設定
-	SetGraphMode(wScreen, hScreen, depthScreen);
+	SetGraphMode(SCREEN_W, SCREEN_H, SCREEN_DEPTH);
 	
 	//DXライブラリを初期化
 	DxLib_Init();
 	
 	//描画先画面を裏にする
-	SetDrawScreen(DX_SCREEN_BACK);
+	SetDraSCREEN_W(DX_SCREEN_BACK);
 	
 	// 乱数初期化
 	srand((unsigned int)time(NULL));
@@ -49,7 +49,7 @@ int WINAPI WinMain(
 //各種命令ぶっこみ
 		pGame->Input();//入力
 		pGame->Update();//計算
-		ClearDrawScreen();
+		ClearDraSCREEN_W();
 		pGame->Render();//描画
 		ScreenFlip();
 	}

@@ -12,13 +12,15 @@
 #include<memory>
 #include"../Player/Player.h"
 #include	"../Object/ObjectServer.h"
+#include	"../BackGround/BackGround.h"
+#include	"../BackGround/MapChips.h"
 
 class Player;
 
 //画面設定
-constexpr auto wScreen = 1920;		//< 画面の横解像度
-constexpr auto hScreen = 1080;		//< 画面の縦解像度
-constexpr auto depthScreen = 32;   ///< １ドットあたりのビット数
+constexpr auto SCREEN_W = 1920;		//< 画面の横解像度
+constexpr auto SCREEN_H = 1080;		//< 画面の縦解像度
+constexpr auto SCREEN_DEPTH = 32;   ///< １ドットあたりのビット数
 
 //ゲームクラス
 class Game 
@@ -28,6 +30,15 @@ public:
 	~Game();//デストラクタ
 	
 	std::unique_ptr<Player>pPlayer;
+
+	// 背景
+	BackGround	_bg;
+
+	// マップチップ
+	MapChips	_mapChips;
+
+	// オブジェクトサーバ
+	ObjectServer	_objServer;		// プレイヤーや敵などを登録する
 
 	//関数
 	void Input();//入力

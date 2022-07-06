@@ -7,6 +7,8 @@
  * \date   July 2022
  *********************************************************************/
 
+#include	<unordered_map>
+
 class ResourceServer {
 public:
 	static	void	Init();

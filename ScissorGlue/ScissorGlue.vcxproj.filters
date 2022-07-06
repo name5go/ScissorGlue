@@ -43,11 +43,11 @@
     <Filter Include="ヘッダー ファイル\Player">
       <UniqueIdentifier>{600babcd-eacc-4609-ab77-02cc507634ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\BackGround">
-      <UniqueIdentifier>{e6aa145f-07c4-448a-955d-cc38359bfe99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\BackGround">
+    <Filter Include="ヘッダー ファイル\Map">
       <UniqueIdentifier>{6702acba-22bb-4a30-a108-242b6c702917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Map">
+      <UniqueIdentifier>{e6aa145f-07c4-448a-955d-cc38359bfe99}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,8 +78,11 @@
     <ClCompile Include="!_Source\Math\Math.cpp">
       <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="!_Source\BackGround\BackGround.cpp">
-      <Filter>ソース ファイル\BackGround</Filter>
+    <ClCompile Include="!_Source\BackGround\MapChips.cpp">
+      <Filter>ソース ファイル\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="!_Source\Map\BackGround.cpp">
+      <Filter>ソース ファイル\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +98,7 @@
     <ClInclude Include="!_Source\Player\Player.h">
       <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
-    <ClInclude Include="!_Source\Object\ResourceServere.h">
+    <ClInclude Include="!_Source\Object\ResourceServer.h">
       <Filter>ヘッダー ファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="!_Source\Object\SoundServer.h">
@@ -107,8 +110,11 @@
     <ClInclude Include="!_Source\Math\Math.h">
       <Filter>ヘッダー ファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="!_Source\BackGround\BackGround.h">
-      <Filter>ヘッダー ファイル\BackGround</Filter>
+    <ClInclude Include="!_Source\Map\BackGround.h">
+      <Filter>ヘッダー ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\BackGround\MapChips.h">
+      <Filter>ヘッダー ファイル\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
