@@ -51,19 +51,19 @@ public:
 	int xCamera, yCamera;
 	//画像の縦の大きさと横の大きさ
 	int wPic, hPic;
-	//内部蓄積慣性
-	int inertia;
-	//加速度
-	int speed;
-	//重力加速度
-	int gravity;
+
+	//内部蓄積慣性、左から横慣性と縦慣性
+	int besideInertia,verticalInertia;
+	//スピード（横の加速度	//重力の強さ(縦の加速度
+	int besideSpeed,verticalSpeed;
+	
 	//接地フラグ0空中1地上
 	int stand;
-
-	//当たり判定
-
-
-
-
-
+	
+	//当たり判定用
+	int xHit, yHit;
+	int wHit, hHit;
+	
+	//動作カウンタ
+	int cnt;
 };
