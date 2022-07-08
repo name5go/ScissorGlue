@@ -32,10 +32,12 @@ public:
 	//描画
 	void Draw();
 
+
+
 	//衝突調査
 	int CheckHit(int x, int y);
 	//衝突調査
-	int Ishit(ObjectBase& o, int mx, int my);
+	int IsHit(ObjectBase& o, int mx, int my);
 
 	//ロードジェイソン
 	bool LoadJson(std::string folderpath, std::string filename);

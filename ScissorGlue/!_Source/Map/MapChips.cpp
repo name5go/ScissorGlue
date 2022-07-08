@@ -118,3 +118,112 @@ int MapChips::CheckHit(int x, int y)
 
 
 //オブジェクトとマップチップが当たったかの判定、および当たった場合の処理
+
+
+int MapChips::IsHit(ObjectBase& o, int mx, int my)
+{
+	int x, y;
+
+	// キャラ矩形を作成する
+	int l, t, r, b;		// 左上(left,top) - 右下(right,bottom)
+	l = o.xWorld + o.xHit;
+	t = o.yWorld + o.yHit;
+	r = o.xWorld + o.xHit + o.wHit - 1;
+	b = o.yWorld + o.yHit + o.hHit - 1;
+
+	// キャラの左上座標～右下座標にあたるマップチップと、当たり判定を行う
+	for (y = t / hChip; y <= b / hChip; y++)
+	{
+		for (x = l / wChip; x <= r / wChip; x++)
+		{
+			// (x,y)は、マップチップの座標（チップ単位）
+			// この位置のチップは当たるか？
+			int noChip = CheckHit(x, y);
+			if (noChip != 0)
+			{	// このチップと当たった。
+				// X,Yの移動方向を見て、その反対方向に補正する
+				if (mx < 0)
+				{	// 左に動いていたので、右に補正
+					o.xWorld = x * wChip + wChip - (o.xHit);
+				}
+				if (mx > 0)
+				{	// 右に動いていたので、左に補正
+					o.xWorld = x * wChip - (o.xHit + o.wHit);
+				}
+				if (my > 0)
+				{	// 下に動いていたので、上に補正
+					o.yWorld = y * hChip - (o.yHit + o.hHit);
+				}
+				if (my < 0)
+				{	// 上に動いていたので、下に補正
+					o.yWorld = y * hChip + hChip - (o.yWorld);
+				}
+				// 当たったので戻る
+				return 1;
+			}
+		}
+	}
+
+	// 当たらなかった
+	return 0;
+}
+
+//ロードジェイソン
+bool MapChips::LoadJson(std::string folderpath, std::string filename) {
+	// ファイルからjsonデータの読み込み
+	std::ifstream ifs(folderpath + filename);
+	picojson::value json;
+	ifs >> json;
+
+	// jsonデータからパラメータを取得
+	picojson::object jsRoot = json.get<picojson::object>();
+	wMap = (int)jsRoot["width"].get<double>();
+	hMap = (int)jsRoot["height"].get<double>();
+
+	// タイルセット取得(1つのみ対応)
+	picojson::array aTileSets = jsRoot["tilesets"].get<picojson::array>();
+	picojson::object jsTile = aTileSets[0].get<picojson::object>();
+	chipCount = (int)jsTile["tilecount"].get<double>();
+	wChipCount = (int)jsTile["columns"].get<double>();
+	hChipCount = (chipCount / wChipCount);		// 計算で出す
+	wChip = (int)jsRoot["tilewidth"].get<double>();
+	hChip = (int)jsRoot["tileheight"].get<double>();
+	std::string strChipFile = jsTile["image"].get<std::string>();       // 画像ファイル名
+
+	// チップ画像読み込み
+	vCgChip.resize(chipCount);
+	ImageServer::LoadDivGraph((folderpath + strChipFile).c_str()
+		, chipCount, wChipCount, hChipCount
+		, wChip, hChip
+		, vCgChip.data());
+
+
+	// レイヤー情報の取得
+	picojson::array aLayers = jsRoot["layers"].get<picojson::array>();
+
+	// レイヤー内データの取得
+	for (int i = 0; i < aLayers.size(); i++) {
+
+		picojson::object jsLayer = aLayers[i].get<picojson::object>();		// レイヤーオブジェクト
+		// レイヤー種類が「tilelayer」のものをカウントする
+		if (jsLayer["type"].get<std::string>() == "tilelayer") {
+			picojson::array aData = jsLayer["data"].get<picojson::array>();			// マップ配列
+			int index = 0;
+			std::vector<std::vector<MapChip>>	vMapLayer;	// 1レイヤー分のデータ
+			for (int y = 0; y < hMap; y++) {
+				std::vector<MapChip>	vMapLine;	// 1行分のデータ
+				for (int x = 0; x < wMap; x++) {
+					MapChip chip;
+					chip.idMapChip = (int)aData[index].get<double>();
+					vMapLine.push_back(chip);
+					index++;
+				}
+				vMapLayer.push_back(vMapLine);
+			}
+			// レイヤーデータを追加
+			vMap.push_back(vMapLayer);
+		}
+	}
+
+	return true;
+}

@@ -58,3 +58,4 @@ void ObjectBase::Draw(Game& g)
 	//•ÏX‚µ‚½À•W‚É•`‰æ
 	DrawGraph(x, y, cgPic[(cnt / 8) % cgNum], TRUE);
 }
+
