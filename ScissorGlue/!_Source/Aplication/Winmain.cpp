@@ -11,6 +11,7 @@
 #include <time.h>
 #include<memory>
 #include"../Aplication/Game.h"
+#include"../Object/ImageServer.h"
 
 
 //エントリーポイント
@@ -36,7 +37,7 @@ int WINAPI WinMain(
 	
 	
 	//ゲームクラスのポインタ生成
-	auto pGame = std::make_unique<Game>();
+	Game* g = new Game();
 	
 	
 	//ゲームのメインループescapeで終了
@@ -49,10 +50,13 @@ int WINAPI WinMain(
 //各種命令ぶっこみ
 		pGame->Input();//入力
 		pGame->Update();//計算
-		ClearDrawScreen();
 		pGame->Render();//描画
-		ScreenFlip();
 	}
+
+	//イメージサーバー解放
+	ImageServer::Release();
+	//ゲームクラスの解放
+	delete g;
 	// Dxライブラリ終了
 	DxLib_End();
 	return 0;

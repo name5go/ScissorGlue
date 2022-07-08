@@ -7,6 +7,7 @@
  * \date   July 2022
  *********************************************************************/
 #include"../Aplication/Game.h"
+#include"../Object/ObjectBase.h"
 
 class Game;
 

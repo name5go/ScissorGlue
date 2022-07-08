@@ -6,46 +6,55 @@
  * \date   June 2022a
  *********************************************************************/
 
+#include"DxLib.h"
 #include"Game.h"
 
  //プレイヤークラスのポインタ生成
 
 
 //コンストラクタ
-Game::Game():
-	gKey(0),
-	gTrg(0),
-	gFrameCount(0)
+Game::Game()
 {
-	//プレイヤークラスのポインタ生成
-	 pPlayer = std::make_unique<Player>(*this);
-//画像周りの読み込み処理つっこみたい
-	// _mapChips.LoadJson("res/", "platformer_simpleA.json");
+	gKey = 0;
+	gFrameCount = 0;
+	gTrg = 0;
+
+	// jsonからマップデータを構築する
+	mapChips.LoadJson("res/", "platformer_simpleA.json");
+
+	// プレイヤーを生成し、オブジェクトサーバに登録する
+	objectServer.Add(new Player());
 }
 
 //デストラクタ
-Game::~Game(){}
+Game::~Game()
+{
+}
 
 //入力
-void Game::Input() {
+void Game::Input()
+{
 	//キーのトリガ情報生成
 	CreateKeyTrg();
-	//それぞれのクラスの命令を回す。
-	pPlayer->Input();
 }
 
 //計算
 void Game::Update() 
 {
-	//それぞれのクラスの命令を回す。
-	pPlayer->Update();
+	objectServer.Process(*this);
+	mapChips.Process(*this);
+	gFrameCount++;
 }
 
 //描画
 void Game::Render()
 {
-	//それぞれのクラスの命令を回す。
-	pPlayer->Render();
+	//画面初期化
+	ClearDrawScreen();
+	bg.Draw();
+	mapChips.Draw();
+	objectServer.Draw(*this);
+	ScreenFlip();
 }
 
 //キーのトリガ情報生成。1フレーム前のキーの情報と比較してかつ入力されてるなら

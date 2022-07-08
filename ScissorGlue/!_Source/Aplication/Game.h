@@ -49,4 +49,13 @@ public:
 	int gTrg;
 	//フレームカウント
 	int gFrameCount;
+
+	//背景
+	BackGround bg;
+
+	//マップチップ
+	MapChips mapChips;
+
+	//オブジェクトサーバー
+	ObjectServer objectServer;
 };

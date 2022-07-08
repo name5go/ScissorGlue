@@ -9,6 +9,7 @@
 #include<DxLib.h>
 #include"Player.h"
 #include"Math.h"
+#include"../Aplication/Game.h"
 #include"../Object/ImageServer.h"
 
 //コンストラクタ
