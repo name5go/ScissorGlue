@@ -9,11 +9,11 @@
 #include<DxLib.h>
 #include"Player.h"
 #include"Math.h"
-#include"../Object/ResourceServer.h"
+#include"../Object/ImageServer.h"
 
 //コンストラクタ
 Player::Player(Game& pGame) :
-	g(pGame),
+	game(pGame),
 	//Playerメンバ変数の初期化
 	xPlayer(0), yPlayer(0),//プレイヤー座標を0,0で初期化
 	inertiaPlayer(0),//プレイヤーの慣性
@@ -26,7 +26,7 @@ Player::Player(Game& pGame) :
 
 {
 	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換える
-	gh = ResourceServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
+	gh = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
 }
 
 //デストラクタ
@@ -45,7 +45,7 @@ void Player::Input()
 	constexpr auto X_KEY = PAD_INPUT_2;
 
 	//左押されてたら左方向
-	if(g.gKey&PAD_INPUT_LEFT||g.gKey&A_KEY)
+	if(g.gKey&PAD_INPUT_LEFT||game.gKey&A_KEY)
 	{
 		//ボタンを押された時の処理
 		turnPlayerFlag = FALSE;
@@ -53,7 +53,7 @@ void Player::Input()
 	}
 
 	//右押されてたら右方向
-	if (g.gKey & PAD_INPUT_RIGHT||g.gKey&D_KEY )
+	if (game.gKey & PAD_INPUT_RIGHT||game.gKey&D_KEY )
 	{
 		//ボタンを押された時の処理
 		//描画の反転をオン
@@ -63,7 +63,7 @@ void Player::Input()
 
 	//g.gKey & PAD_INPUT_A ||
 	//ジャンプ
-	if (g.gTrg & W_KEY)
+	if (game.gTrg & W_KEY)
 	{
 		if(standFlag==1)
 		{
@@ -86,7 +86,7 @@ void Player::Update()
 	xPlayer += inertiaPlayer;
 	yPlayer += gravityPlayer;
 
-	//重力処理
+//	重力処理過去のやつ
 if (yPlayer > 1000)
 	{
 		gravityPlayer = 0;

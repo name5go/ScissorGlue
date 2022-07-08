@@ -26,28 +26,27 @@ constexpr auto SCREEN_DEPTH = 32;   ///< １ドットあたりのビット数
 class Game 
 {
 public:
-	Game();//コンストラクタ
-	~Game();//デストラクタ
+	//コンストラクタ
+	Game();
+	//デストラクタ
+	~Game();
 	
+	//プレイヤークラス
 	std::unique_ptr<Player>pPlayer;
 
-	// 背景
-	BackGround	_bg;
-
-	// マップチップ
-	MapChips	_mapChips;
-
-	// オブジェクトサーバ
-	ObjectServer	_objServer;		// プレイヤーや敵などを登録する
-
-	//関数
-	void Input();//入力
-	void Update();//計算
-	void Render();//描画
+	//入力
+	void Input();
+	//計算
+	void Update();
+	//描画
+	void Render();
+	//キー情報の生成
 	void CreateKeyTrg();
 
-	//メンバ変数宣言
+	//キー情報
 	int gKey;
+	//一回押し判定
 	int gTrg;
+	//フレームカウント
 	int gFrameCount;
 };

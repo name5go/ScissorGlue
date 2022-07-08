@@ -17,9 +17,10 @@ Game::Game():
 	gTrg(0),
 	gFrameCount(0)
 {
+	//プレイヤークラスのポインタ生成
 	 pPlayer = std::make_unique<Player>(*this);
 //画像周りの読み込み処理つっこみたい
-	 _mapChips.LoadJson("res/", "platformer_simpleA.json");
+	// _mapChips.LoadJson("res/", "platformer_simpleA.json");
 }
 
 //デストラクタ
@@ -29,18 +30,21 @@ Game::~Game(){}
 void Game::Input() {
 	//キーのトリガ情報生成
 	CreateKeyTrg();
-
+	//それぞれのクラスの命令を回す。
 	pPlayer->Input();
 }
 
 //計算
-void Game::Update() {
+void Game::Update() 
+{
+	//それぞれのクラスの命令を回す。
 	pPlayer->Update();
-
 }
 
 //描画
-void Game::Render() {
+void Game::Render()
+{
+	//それぞれのクラスの命令を回す。
 	pPlayer->Render();
 }
 

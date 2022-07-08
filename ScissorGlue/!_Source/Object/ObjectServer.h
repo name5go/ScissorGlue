@@ -1,33 +1,52 @@
 #pragma once
-#include	<vector>
-#include	"ObjectBase.h"
+/*****************************************************************//**
+ * \file   ObjectServer.h
+ * \brief  オブジェクトサーバー
+ * 
+ * \author めざし
+ * \date   July 2022
+ *********************************************************************/
+
+#include<vector>
+#include"ObjectBase.h"
+
 
 class Game;
 
-// オブジェクトサーバー
-class ObjectServer {
+//オブジェクトサーバー
+class ObjectServer
+{
 public:
+	//コンストラクタ
 	ObjectServer();
+	//コンストラクタ
 	~ObjectServer();
 
-	void	Clear();
-	void	Add(ObjectBase* obj);
-	void	Del(ObjectBase* obj);
+	//消す
+	void Clear();
+	//加える
+	void Add(ObjectBase* obj);
+	//抹消す
+	void Del(ObjectBase* obj);
 
-	void	Process(Game& g);
-	void	Draw(Game& g);
+	//計算
+	void Process(Game& g);
+	//描画
+	void Draw(Game& g);
 
-	std::vector<ObjectBase*>* List() { return &_vObject; }
+	std::vector<ObjectBase*>* List() { return&vObject; }
 
 private:
-	void	AddListObjects();
-	void	DelListObjects();
+	//Addリストのオブジェクトを追加する
+	void AddListObjects();
+	// Delリストのオブジェクトを削除する
+	void DelListObjects();
 
 protected:
-	std::vector<ObjectBase*>	_vObject;		// ObjectBaseを登録するリスト
-
-	std::vector<ObjectBase*>	_vAdd;	// 追加するオブジェクトリスト
-	std::vector<ObjectBase*>	_vDel;	// 削除するオブジェクトリスト
-
-
+	//ObjectBaseを登録するリスト
+	std::vector<ObjectBase*> vObject;
+	//追加するオブジェクトリスト
+	std::vector<ObjectBase*> vAdd;
+	//削除するオブジェクトリスト
+	std::vector<ObjectBase*> vDel;
 };

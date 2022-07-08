@@ -1,65 +1,70 @@
-/*
-** オブジェクトサーバ
-*/
+/*****************************************************************//**
+ * \file   ObjectServer.cpp
+ * \brief  オブジェクトサーバー
+ * 
+ * \author めざし
+ * \date   July 2022
+ *********************************************************************/
 
-#include "DxLib.h"
-#include "ObjectServer.h"
+#include<DxLib.h>
+#include"ObjectServer.h"
 
+//コンストラクタ
 ObjectServer::ObjectServer()
 {
-	_vObject.clear();
-	_vAdd.clear();
-	_vDel.clear();
+	vObject.clear();
+	vAdd.clear();
+	vDel.clear();
 }
-
+//デストラクタ
 ObjectServer::~ObjectServer()
 {
 	Clear();
 }
 
-// リストに登録されているオブジェクトをすべて消す
-void	ObjectServer::Clear()
+//リストに登録されてるオブジェクトの全消し
+void ObjectServer::Clear()
 {
-	for (auto ite = _vObject.begin(); ite != _vObject.end(); ite++)
+	for (auto ite = vObject.begin(); ite != vObject.end(); ite++)
 	{
-		delete (*ite);
+		delete(*ite);
 	}
-	_vObject.clear();
+	vObject.clear();
 }
 
-// Addリストにオブジェクトを登録する
-void	ObjectServer::Add(ObjectBase* obj)
+//Addリストにオブジェクトの登録
+void ObjectServer::Add(ObjectBase* obj)
 {
-	_vAdd.push_back(obj);
+	vAdd.push_back(obj);
 }
 
-// Delリストにオブジェクトを登録する
-void	ObjectServer::Del(ObjectBase* obj)
+//Delリストにオブジェクトを登録する
+void ObjectServer::Del(ObjectBase* obj)
 {
-	_vDel.push_back(obj);
+	vDel.push_back(obj);
 }
 
-// Addリストのオブジェクトを追加する
-void	ObjectServer::AddListObjects()
+//Addリストのオブジェクトを追加する
+void ObjectServer::AddListObjects()
 {
-	for (auto iteAdd = _vAdd.begin(); iteAdd != _vAdd.end(); iteAdd++)
+	for (auto iteAdd = vAdd.begin(); iteAdd != vAdd.end(); iteAdd++)
 	{
-		_vObject.push_back((*iteAdd));
+		vObject.push_back((*iteAdd));
 	}
-	_vAdd.clear();
+	vAdd.clear();
 }
 
-// Delリストのオブジェクトを削除する
-void	ObjectServer::DelListObjects()
+//Dekリストのオブジェクト全消し
+void ObjectServer::DelListObjects()
 {
-	for (auto iteDel = _vDel.begin(); iteDel != _vDel.end(); iteDel++)
+	for (auto iteDel = vDel.begin(); iteDel != vDel.end(); iteDel++)
 	{
-		for (auto ite = _vObject.begin(); ite != _vObject.end();)
+		for (auto ite = vObject.begin(); ite != vObject.end();)
 		{
-			if ((*ite) == (*iteDel))
+			if((*ite) == (*iteDel))
 			{
-				delete (*ite);
-				ite = _vObject.erase(ite);
+				delete(*ite);
+				ite = vObject.erase(ite);
 			}
 			else
 			{
@@ -67,31 +72,41 @@ void	ObjectServer::DelListObjects()
 			}
 		}
 	}
-	_vDel.clear();
+	vDel.clear();
 }
 
 
-// Process()を登録順に回す
-void	ObjectServer::Process(Game& g)
+//Processを登録順に回す
+void ObjectServer::Process(Game& g)
 {
-	// Addリストにあるオブジェクトをリストに登録する
+	//Addリストのオブジェクトをリストに登録する
 	AddListObjects();
 
-	// Process()の呼び出し
-	for (auto ite = _vObject.begin(); ite != _vObject.end(); ite++)
+	//Process()の呼び出し
+	for (auto ite = vObject.begin(); ite != vObject.end(); ite++)
 	{
 		(*ite)->Process(g);
 	}
-
-	// Delリストにあるオブジェクトをリストから削除する
+	//Delリストにあるオブジェクトをリストから削除
 	DelListObjects();
 }
 
-// Draw()を登録順に回す
-void	ObjectServer::Draw(Game& g)
+//Drawを登録準に回す
+void ObjectServer::Draw(Game& g)
 {
-	for (auto ite = _vObject.begin(); ite != _vObject.end(); ite++)
+	for (auto ite = vObject.begin(); ite != vObject.end(); ite++)
 	{
 		(*ite)->Draw(g);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+

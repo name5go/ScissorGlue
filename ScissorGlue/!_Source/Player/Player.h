@@ -11,6 +11,7 @@
 class Game;
 
 class Player
+	
 {
 public:
 	//コンストラクタ
@@ -23,25 +24,32 @@ public:
 	void Update();
 	void Render();
 
-	Game& g;
+	//ゲームクラスのポインタ
+	Game& game;
+
 	int gh;//グラフィックハンドル、後でイメージサーバーのやつに変更忘れるな
 
 private:
-	//メンバ変数の宣言
-	int xPlayer;//プレイヤーのX座標
-	int yPlayer;//同Y座標
-	float anglePlayer;//同角度
-	float sizePlayer;//同描画拡大率
-	int inertiaPlayer;//プレイヤーの加速度
-	int inertiaMax;//最大速度というか内部蓄積慣性の最大値
-	int standFlag;//地面接触フラグ
-	int gravityPlayer;//重力
+	//プレイヤーのX座標
+	int xPlayer;
+	//同Y座標
+	int yPlayer;
+	//同角度
+	float anglePlayer;
+	//同描画拡大率
+	float sizePlayer;
+	//プレイヤーの加速度
+	int inertiaPlayer;
+	//最大速度というか内部蓄積慣性の最大値
+	int inertiaMax;
+	//地面接触フラグ
+	int standFlag;
+	//重力
+	int gravityPlayer;
 	
 	
 	
-
-	bool turnPlayerFlag;//プレイヤーの反転描画オンオフ
-
-
+	//プレイヤーの反転描画オンオフ
+	bool turnPlayerFlag;
 	
 };
