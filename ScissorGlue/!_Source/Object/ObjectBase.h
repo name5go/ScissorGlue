@@ -23,13 +23,44 @@ public:
 	{
 		PLAYER,
 	};
+	virtual OBJECTTYPE GetType() = 0;
 
-	void Process();
-	void Draw();
+	//初期化
+	void Init();
+	//計算
+	void Process(Game&g);
+	//描画
+	void Draw(Game&g);
+
+	//プロセスに含まれる移動周りの計算
+	
+	//移動周りの命令
+	void GoFoward();
+	void GoBack();
+	void Gravity();
+	void Jump();
 
 public:
-	int _cg[2];
-	
+	//画像
+	int cgPic[2];
+	//画像枚数
+	int cgNum;
+	//ワールド座標のXとY
+	int xWorld, yWorld;
+	//描画時の座標
+	int xCamera, yCamera;
+	//画像の縦の大きさと横の大きさ
+	int wPic, hPic;
+	//内部蓄積慣性
+	int inertia;
+	//加速度
+	int speed;
+	//重力加速度
+	int gravity;
+	//接地フラグ0空中1地上
+	int stand;
+
+	//当たり判定
 
 
 

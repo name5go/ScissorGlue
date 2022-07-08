@@ -45,7 +45,7 @@ void Player::Input()
 	constexpr auto X_KEY = PAD_INPUT_2;
 
 	//¶‰Ÿ‚³‚ê‚Ä‚½‚ç¶•ûŒü
-	if(g.gKey&PAD_INPUT_LEFT||game.gKey&A_KEY)
+	if(game.gKey&PAD_INPUT_LEFT||game.gKey&A_KEY)
 	{
 		//ƒ{ƒ^ƒ“‚ğ‰Ÿ‚³‚ê‚½‚Ìˆ—
 		turnPlayerFlag = FALSE;
