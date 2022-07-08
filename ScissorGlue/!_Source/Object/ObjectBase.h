@@ -58,7 +58,7 @@ public:
 	int besideSpeed,verticalSpeed;
 	
 	//接地フラグ0空中1地上
-	int stand;
+	int standFlag;
 	
 	//当たり判定用
 	int xHit, yHit;
