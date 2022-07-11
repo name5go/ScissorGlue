@@ -59,3 +59,9 @@ void ObjectBase::Draw(Game& g)
 	DrawGraph(x, y, cgPic[(cnt / 8) % cgNum], TRUE);
 }
 
+void ObjectBase::Gravity()
+{
+	verticalInertia += 1;
+	yWorld += verticalInertia;
+	standFlag = 0;
+}

@@ -8,45 +8,33 @@
  *********************************************************************/
 
 #include<vector>
-#include"ObjectBase.h"
+#include<memory>
+#include<DxLib.h>
 
 
 class Game;
+class ObjectBase;
 
 //オブジェクトサーバー
 class ObjectServer
 {
 public:
 	//コンストラクタ
-	ObjectServer();
+	ObjectServer(Game& pGame);
 	//コンストラクタ
 	~ObjectServer();
 
-	//消す
+	//消すやつ
 	void Clear();
 	//加える
-	void Add(ObjectBase* obj);
-	//抹消す
-	void Del(ObjectBase* obj);
+	void Add(std::unique_ptr<ObjectBase> obj);
 
-	//計算
-	void Process(Game& g);
-	//描画
-	void Draw(Game& g);
+	//分回す命令
+	void Draw();
+	void Process();
 
-	std::vector<ObjectBase*>* List() { return&vObject; }
-
-private:
-	//Addリストのオブジェクトを追加する
-	void AddListObjects();
-	// Delリストのオブジェクトを削除する
-	void DelListObjects();
 
 protected:
-	//ObjectBaseを登録するリスト
-	std::vector<ObjectBase*> vObject;
-	//追加するオブジェクトリスト
-	std::vector<ObjectBase*> vAdd;
-	//削除するオブジェクトリスト
-	std::vector<ObjectBase*> vDel;
+	Game& g;
+	std::vector<std::unique_ptr<ObjectBase>>vObj;
 };

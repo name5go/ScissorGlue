@@ -6,51 +6,22 @@
  * \author めざし
  * \date   July 2022
  *********************************************************************/
-#include"../Aplication/Game.h"
 #include"../Object/ObjectBase.h"
 
 class Game;
 
-class Player
-	
+class Player:public ObjectBase
 {
+	typedef ObjectBase base;
 public:
 	//コンストラクタ
-	Player(Game& pGame);
+	Player();
 	//デストラクタ
 	~Player();
 
-	//メンバ関数の宣言
-	void Input();
-	void Update();
-	void Render();
-
-	//ゲームクラスのポインタ
-	Game& game;
-
-	int gh;//グラフィックハンドル、後でイメージサーバーのやつに変更忘れるな
+	void Init();
+	void Process(Game& g);
 
 private:
-	//プレイヤーのX座標
-	int xPlayer;
-	//同Y座標
-	int yPlayer;
-	//同角度
-	float anglePlayer;
-	//同描画拡大率
-	float sizePlayer;
-	//プレイヤーの加速度
-	int inertiaPlayer;
-	//最大速度というか内部蓄積慣性の最大値
-	int inertiaMax;
-	//地面接触フラグ
-	int standFlag;
-	//重力
-	int gravityPlayer;
-	
-	
-	
-	//プレイヤーの反転描画オンオフ
-	bool turnPlayerFlag;
-	
+
 };

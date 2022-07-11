@@ -1,26 +1,22 @@
 { "height":18,
  "layers":[
         {
-         "height":0,
-         "image":"platformer_BG.png",
+         "image":"..\/background\/background.png",
          "name":"image1",
          "opacity":1,
          "type":"imagelayer",
          "visible":true,
-         "width":0,
          "x":0,
          "y":0
         }, 
         {
-         "height":0,
-         "image":"platformer_BG.png",
+         "image":"..\/background\/background.png",
          "name":"image2",
          "offsetx":1280,
          "offsety":0,
          "opacity":1,
          "type":"imagelayer",
          "visible":true,
-         "width":0,
          "x":0,
          "y":0
         }, 
@@ -43,7 +39,7 @@
         {
          "columns":8,
          "firstgid":1,
-         "image":"platformer_simpleA_sheet.png",
+         "image":"..\/maps\/map01.png",
          "imageheight":320,
          "imagewidth":320,
          "margin":0,
@@ -54,6 +50,7 @@
          "tilewidth":40
         }],
  "tilewidth":40,
- "version":1,
+ "type":"map",
+ "version":"2017.05.26",
  "width":64
 }

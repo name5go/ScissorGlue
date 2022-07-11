@@ -22,6 +22,11 @@ int WINAPI WinMain(
 
 	//ウィンドウモード変更
 	ChangeWindowMode(TRUE);
+
+	if (DxLib_Init() == -1)
+	{	// エラーが起きたら直ちに終了
+		return -1;
+	}
 	
 	//画面解像度を1920x1080でカラービット数を32bitに設定
 	SetGraphMode(SCREEN_W, SCREEN_H, SCREEN_DEPTH);
@@ -48,9 +53,9 @@ int WINAPI WinMain(
 			break;
 		}
 //各種命令ぶっこみ
-		pGame->Input();//入力
-		pGame->Update();//計算
-		pGame->Render();//描画
+		g->Input();//入力
+		g->Process();//計算
+		g->Render();//描画
 	}
 
 	//イメージサーバー解放

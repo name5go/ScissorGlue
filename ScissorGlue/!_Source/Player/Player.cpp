@@ -13,21 +13,11 @@
 #include"../Object/ImageServer.h"
 
 //コンストラクタ
-Player::Player(Game& pGame) :
-	game(pGame),
-	//Playerメンバ変数の初期化
-	xPlayer(0), yPlayer(0),//プレイヤー座標を0,0で初期化
-	inertiaPlayer(0),//プレイヤーの慣性
-	gravityPlayer(0),
-	inertiaMax(20),//最大速度
-	sizePlayer(1.0),//プレイヤーの描画倍率
-	anglePlayer(0.0),//プレイヤーの角度
-	turnPlayerFlag(FALSE),//プレイヤーの反転フラグ
-	standFlag(0)
-
+Player::Player() 
 {
 	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換える
-	gh = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
+	cgPic[0] = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
+	Init();
 }
 
 //デストラクタ
@@ -35,9 +25,28 @@ Player::~Player()
 {
 }
 
-//入力
-void Player::Input()
+//プレイヤー情報の初期化
+void Player::Init()
 {
+	cgNum = 1;
+	wPic = 32;
+	hPic = 48;
+	xWorld = 32;
+	yWorld = 0;
+	xCamera = wPic / 2;
+	yCamera = hPic + 1;
+	besideInertia = 0;
+	verticalInertia = 0;
+	xHit = -16;
+	yHit = -47;
+	wHit = 32;
+	hHit = 48;
+}
+
+//入力
+void Player::Process(Game& g)
+{
+	ObjectBase::Process(g);
 //WASDの入力を登録
 	constexpr auto A_KEY = PAD_INPUT_4;
 	constexpr auto D_KEY = PAD_INPUT_6;
@@ -46,80 +55,38 @@ void Player::Input()
 	constexpr auto X_KEY = PAD_INPUT_2;
 
 	//左押されてたら左方向
-	if(game.gKey&PAD_INPUT_LEFT||game.gKey&A_KEY)
+	if(g.gKey&PAD_INPUT_LEFT||g.gKey&A_KEY)
 	{
 		//ボタンを押された時の処理
-		turnPlayerFlag = FALSE;
-			inertiaPlayer -= 3;
+		xWorld -= 1;
+		g.mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
 	}
 
 	//右押されてたら右方向
-	if (game.gKey & PAD_INPUT_RIGHT||game.gKey&D_KEY )
+	if (g.gKey & PAD_INPUT_RIGHT||g.gKey&D_KEY )
 	{
+
 		//ボタンを押された時の処理
 		//描画の反転をオン
-		turnPlayerFlag = TRUE;
-		inertiaPlayer += 3;
+		xWorld += 1;
+		g.mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
 	}
 
 	//g.gKey & PAD_INPUT_A ||
 	//ジャンプ
-	if (game.gTrg & W_KEY)
+	if (g.gTrg & W_KEY)
 	{
 		if(standFlag==1)
 		{
-			gravityPlayer = -25;
+			verticalInertia = -20;
+			//ジャンプ処理
 		}
 	}
-}
+	// 主人公位置からのカメラ座標決定
+	g.mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
+	g.mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
 
-//描画
-void Player::Render()
-{
-	DrawRotaGraph(xPlayer, yPlayer, sizePlayer, anglePlayer, gh, TRUE, turnPlayerFlag);
-}
-
-
-//更新
-void Player::Update()
-{
-	//座標の反映
-	xPlayer += inertiaPlayer;
-	yPlayer += gravityPlayer;
-
-//	重力処理過去のやつ
-if (yPlayer > 1000)
-	{
-		gravityPlayer = 0;
-		standFlag = 1;
-	}
-	else
-	{
-		standFlag = 0;
-		gravityPlayer += 1;
-	
-	}
-
-
-//減速処理時間に余裕あるならベクトルとか絶対値基準で書き直したい
-if (inertiaPlayer < 0)
-{
-	inertiaPlayer += 1;
-}
-if (inertiaPlayer > 0)
-{
-	inertiaPlayer -= 1;
-}
-
-//最大速度の処理これも時間があればベクトルで書き換えたい
-if (inertiaPlayer > inertiaMax)
-{
-	inertiaPlayer = inertiaMax;
-}
-if (inertiaPlayer < -1 * inertiaMax)
-{
-	inertiaPlayer = -1 * inertiaMax;
-}
 
 
 }
+

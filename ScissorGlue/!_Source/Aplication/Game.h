@@ -8,18 +8,14 @@
 
 #pragma once
 
-#include<DxLib.h>
-#include<memory>
 #include"../Player/Player.h"
 #include	"../Object/ObjectServer.h"
 #include	"../BackGround/BackGround.h"
 #include	"../Map/MapChips.h"
 
-class Player;
-
 //画面設定
-constexpr auto SCREEN_W = 1920;		//< 画面の横解像度
-constexpr auto SCREEN_H = 1080;		//< 画面の縦解像度
+constexpr auto SCREEN_W = 1280;		//< 画面の横解像度
+constexpr auto SCREEN_H = 720;		//< 画面の縦解像度
 constexpr auto SCREEN_DEPTH = 32;   ///< １ドットあたりのビット数
 
 //ゲームクラス
@@ -30,14 +26,11 @@ public:
 	Game();
 	//デストラクタ
 	~Game();
-	
-	//プレイヤークラス
-	std::unique_ptr<Player>pPlayer;
 
 	//入力
 	void Input();
 	//計算
-	void Update();
+	void Process();
 	//描画
 	void Render();
 	//キー情報の生成
@@ -50,12 +43,10 @@ public:
 	//フレームカウント
 	int gFrameCount;
 
-	//背景
 	BackGround bg;
-
-	//マップチップ
 	MapChips mapChips;
 
-	//オブジェクトサーバー
-	ObjectServer objectServer;
+protected:
+	ObjectServer pObj;
+	
 };

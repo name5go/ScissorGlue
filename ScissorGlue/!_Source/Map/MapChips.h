@@ -10,6 +10,9 @@
 #include"../picojson/picojson.h"
 #include<string>
 
+class Game;
+class ObjectBase;
+
 //マップチップシングル
 class MapChip
 {
@@ -31,8 +34,6 @@ public:
 	void Process(Game& g);
 	//描画
 	void Draw();
-
-
 
 	//衝突調査
 	int CheckHit(int x, int y);

@@ -13,17 +13,17 @@
 
 
 //コンストラクタ
-Game::Game()
+Game::Game():pObj(*this)
 {
 	gKey = 0;
 	gFrameCount = 0;
 	gTrg = 0;
 
 	// jsonからマップデータを構築する
-	mapChips.LoadJson("res/", "platformer_simpleA.json");
-
-	// プレイヤーを生成し、オブジェクトサーバに登録する
-	objectServer.Add(new Player());
+	mapChips.LoadJson("!_Resources\\!_Pic\\mapchips\\", "map01.json");
+	//各種クラスをポインタに追加
+	auto player = std::make_unique<Player>(*this);
+	pObj.Add(std::move(player));
 }
 
 //デストラクタ
@@ -39,9 +39,9 @@ void Game::Input()
 }
 
 //計算
-void Game::Update() 
+void Game::Process() 
 {
-	objectServer.Process(*this);
+	pObj.Process();
 	mapChips.Process(*this);
 	gFrameCount++;
 }
@@ -53,7 +53,7 @@ void Game::Render()
 	ClearDrawScreen();
 	bg.Draw();
 	mapChips.Draw();
-	objectServer.Draw(*this);
+	pObj.Draw();
 	ScreenFlip();
 }
 

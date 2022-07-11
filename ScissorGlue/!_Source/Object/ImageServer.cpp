@@ -65,3 +65,39 @@ int ImageServer::LoadGraph(const TCHAR* FileName)
 
 	return cg;
 }
+
+int ImageServer::LoadDivGraph(const TCHAR* FileName, int AllNum,
+	int xNum, int yNum,
+	int xSize, int ySize, int* HandleBuf)
+{
+	//キーの検索
+	auto itr = mapDivGraph.find(FileName);
+	if (itr != mapDivGraph.end())
+	{
+		// キーがあった
+		// データをコピー
+		for (int i = 0; i < itr->second.AllNum; i++) {
+			HandleBuf[i] = itr->second.handle[i];
+		}
+		return 0;
+	}
+	// キーが無かった
+	// まずはメモリを作成する
+	int* hbuf = new int[AllNum];
+	int err = ::LoadDivGraph(FileName, AllNum, xNum, yNum, xSize, ySize, hbuf);     // DXLIBのAPIを呼ぶので、::を先頭に付け、このクラスの同じ名前の関数と区別する
+	if (err == 0) {
+		// 成功
+		// キーとデータをmapに登録
+		mapDivGraph[FileName].AllNum = AllNum;
+		mapDivGraph[FileName].handle = hbuf;
+		// データをコピー
+		for (int i = 0; i < AllNum; i++) {
+			HandleBuf[i] = hbuf[i];
+		}
+	}
+
+	return err;
+
+}
+
+
