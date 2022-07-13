@@ -14,21 +14,15 @@ class ObjectBase
 {
 public:
 	//コンストラクタ
-	ObjectBase();
+	ObjectBase(Game& g);
 	//デストラクタ
-	~ObjectBase();
+	virtual ~ObjectBase();
 
-	//オブジェクトタイプ
-	enum class OBJECTTYPE
-	{
-		PLAYER,
-	};
-	virtual OBJECTTYPE GetType() = 0;
 
 	//初期化
 	void Init();
 	//計算
-	void Process(Game&g);
+	virtual void Process(Game&g);
 	//描画
 	void Draw(Game&g);
 
@@ -41,6 +35,8 @@ public:
 	//void Jump();
 
 public:
+	Game& pGame;
+
 	//画像
 	int cgPic[2];
 	//画像枚数

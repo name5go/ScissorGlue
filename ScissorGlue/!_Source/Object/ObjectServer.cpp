@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * \file   ObjectServer.cpp
- * \brief  オブジェクトサーバー
+ * \brief  
  * 
  * \author めざし
  * \date   July 2022
@@ -34,19 +34,19 @@ void ObjectServer::Add(std::unique_ptr<ObjectBase>obj)
 	vObj.push_back(std::move(obj));
 }
 
-//ポインタに追加されたクラスの麺バカンス鵜を回す
+//ポインタに追加された命令を回す
 void ObjectServer::Process(Game& g)
 {
-	for (auto&& obj : vObj)
+	for (auto&& object : vObj)
 	{
-		obj->Process(g);
+		object->Process(g);
 	}
 }
 
 void ObjectServer::Draw(Game& g)
 {
-	for (auto&& obj : vObj)
+	for (auto&& object : vObj)
 	{
-		obj->Draw(g);
+		object->Draw(g);
 	}
 }

@@ -11,9 +11,11 @@
 #include"Math.h"
 #include"../Aplication/Game.h"
 #include"../Object/ImageServer.h"
+#include"../Object/ImageServer.h"
 
 //コンストラクタ
-Player::Player() 
+Player::Player(Game& g)
+	:base(g)
 {
 	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換える
 	cgPic[0] = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
@@ -46,8 +48,22 @@ void Player::Init()
 //入力
 void Player::Process(Game& g)
 {
+
+	CheckInput(g);
 	ObjectBase::Process(g);
-//WASDの入力を登録
+
+	// 主人公位置からのカメラ座標決定
+	g.mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
+	g.mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
+	
+
+
+}
+
+void Player::CheckInput(Game& g)
+{
+	
+	//WASDの入力を登録
 	constexpr auto A_KEY = PAD_INPUT_4;
 	constexpr auto D_KEY = PAD_INPUT_6;
 	constexpr auto W_KEY = PAD_INPUT_8;
@@ -55,7 +71,7 @@ void Player::Process(Game& g)
 	constexpr auto X_KEY = PAD_INPUT_2;
 
 	//左押されてたら左方向
-	if(g.gKey&PAD_INPUT_LEFT||g.gKey&A_KEY)
+	if (g.gKey & PAD_INPUT_LEFT || g.gKey & A_KEY)
 	{
 		//ボタンを押された時の処理
 		xWorld -= 1;
@@ -63,7 +79,7 @@ void Player::Process(Game& g)
 	}
 
 	//右押されてたら右方向
-	if (g.gKey & PAD_INPUT_RIGHT||g.gKey&D_KEY )
+	if (g.gKey & PAD_INPUT_RIGHT || g.gKey & D_KEY)
 	{
 
 		//ボタンを押された時の処理
@@ -76,17 +92,10 @@ void Player::Process(Game& g)
 	//ジャンプ
 	if (g.gTrg & W_KEY)
 	{
-		if(standFlag==1)
+		if (standFlag == 1)
 		{
 			verticalInertia = -20;
 			//ジャンプ処理
 		}
 	}
-	// 主人公位置からのカメラ座標決定
-	g.mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
-	g.mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
-
-
-
 }
-

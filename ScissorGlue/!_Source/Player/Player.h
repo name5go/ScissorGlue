@@ -15,12 +15,13 @@ class Player:public ObjectBase
 	typedef ObjectBase base;
 public:
 	//コンストラクタ
-	Player();
+	Player(Game& g);
 	//デストラクタ
 	~Player();
 
 	void Init();
-	void Process(Game& g);
+	void Process(Game& g) override;
+  void CheckInput(Game& g);
 
 private:
 

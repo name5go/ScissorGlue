@@ -122,8 +122,5 @@
     <ClInclude Include="!_Source\BackGround\BackGround.h">
       <Filter>ヘッダー ファイル\BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="!_Source\picojson\picojson.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
