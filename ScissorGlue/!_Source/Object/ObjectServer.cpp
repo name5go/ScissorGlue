@@ -35,18 +35,18 @@ void ObjectServer::Add(std::unique_ptr<ObjectBase>obj)
 }
 
 //ポインタに追加されたクラスの麺バカンス鵜を回す
-void ObjectServer::Process()
+void ObjectServer::Process(Game& g)
 {
 	for (auto&& obj : vObj)
 	{
-		obj->Process();
+		obj->Process(g);
 	}
 }
 
-void ObjectServer::Draw()
+void ObjectServer::Draw(Game& g)
 {
 	for (auto&& obj : vObj)
 	{
-		obj->Draw();
+		obj->Draw(g);
 	}
 }

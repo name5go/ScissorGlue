@@ -8,6 +8,7 @@
 
 #include"DxLib.h"
 #include"Game.h"
+#include<memory>
 
  //プレイヤークラスのポインタ生成
 
@@ -41,7 +42,7 @@ void Game::Input()
 //計算
 void Game::Process() 
 {
-	pObj.Process();
+	pObj.Process(*this);
 	mapChips.Process(*this);
 	gFrameCount++;
 }
@@ -53,7 +54,7 @@ void Game::Render()
 	ClearDrawScreen();
 	bg.Draw();
 	mapChips.Draw();
-	pObj.Draw();
+	pObj.Draw(*this);
 	ScreenFlip();
 }
 

@@ -35,10 +35,10 @@ public:
 	//プロセスに含まれる移動周りの計算
 	
 	//移動周りの命令
-	void GoFoward();
-	void GoBack();
+	//void GoFoward();
+	//void GoBack();
 	void Gravity();
-	void Jump();
+	//void Jump();
 
 public:
 	//画像

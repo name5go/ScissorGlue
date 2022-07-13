@@ -30,8 +30,8 @@ public:
 	void Add(std::unique_ptr<ObjectBase> obj);
 
 	//•ª‰ñ‚·–½—ß
-	void Draw();
-	void Process();
+	void Draw(Game& g);
+	void Process(Game& g);
 
 
 protected:
