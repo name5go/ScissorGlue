@@ -47,7 +47,9 @@ public:
 	virtual void SetSize(Vector2 pSize) { size = pSize; }
 
 	//ダメージ周りの処理に必要なものの追加
-
+	virtual bool IsDead() { return dead; }//
+	virtual void Dead() { dead = true; }
+	virtual void Damage();
 
 	//プロセスに含まれる移動周りの計算
 	
@@ -56,7 +58,7 @@ public:
 
 
 public:
-	Game& pGame;
+
 
 	int cgPic[2];//画像
 	int cgNum;	//画像枚数
@@ -70,13 +72,18 @@ public:
 	int standFlag;	//接地フラグ0空中1地上
 	
 	int xHit, yHit;	//当たり判定用
-	int wHit, hHit;
+	int wHit, hHit;	//当たり判定用
 
 protected:
+	Game& pGame;
+	bool dead;
+
 	AABB collision;//当たり判定
 	Vector2 pos;//座標
 	Vector2 size;//サイズ
 	Vector2 colPos, colSize;//当たり判定の位置とサイズ
+
+	float spd;//速度
 	
 	int cnt;	//カウント
 };

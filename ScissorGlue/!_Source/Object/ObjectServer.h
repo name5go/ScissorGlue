@@ -29,7 +29,7 @@ public:
 	void Clear();
 	//‰Á‚¦‚é
 	void Add(std::unique_ptr<ObjectBase> obj);
-	void Del(ObjectBase& object);
+	void Del(ObjectBase& obj);
 
 	//•ª‰ñ‚·–½—ß
 	void Draw(Game& g);

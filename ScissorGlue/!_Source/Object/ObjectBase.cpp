@@ -71,8 +71,13 @@ void ObjectBase::UpDateCollision()
 	collision.min = pos + colPos;
 	collision.max = pos + colPos + colSize;
 }
-
+//当たり判定の描画
 void ObjectBase::DrawCollision()
 {
 	collision.Draw(rand() % 256, rand() % 256, rand() % 256);
+}
+//ダメージ処理
+void ObjectBase::Damage()
+{
+	//ダメージ受けた時の処理をここに書くんだぞ！忘れるな！
 }

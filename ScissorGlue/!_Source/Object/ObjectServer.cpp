@@ -51,6 +51,27 @@ void ObjectServer::AddPendingObjects()
 	vPendingObj.clear();
 }
 
+//デリーと
+void ObjectServer::Del(ObjectBase& obj)
+{
+	obj.Dead();
+}
+
+void ObjectServer::DeleteObjects()
+{
+	for (auto ite = vObj.begin(); ite != vObj.end();)
+	{
+		if ((*ite)->IsDead())
+		{
+			ite = vObj.erase(ite);//オブジェクトの削除
+		}
+		else
+		{
+			ite++;
+		}
+	}
+}
+
 //ポインタに追加された命令(ProcessとDrawを回す
 void ObjectServer::Process(Game& g)
 {
@@ -58,6 +79,9 @@ void ObjectServer::Process(Game& g)
 	{
 		object->Process(g);
 	}
+	updating = false;
+	AddPendingObjects();
+	DeleteObjects();
 }
 void ObjectServer::Draw(Game& g)
 {
