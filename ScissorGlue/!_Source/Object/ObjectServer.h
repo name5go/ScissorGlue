@@ -19,15 +19,17 @@ class ObjectBase;
 class ObjectServer
 {
 public:
-	//コンストラクタ
+	//コンストラクタとデストラクタ
 	ObjectServer(Game& pGame);
-	//コンストラクタ
 	~ObjectServer();
+	//オブジェクトリストを定義
+	typedef std::vector<std::unique_ptr<ObjectBase>> TypeObjects;
 
 	//消すやつ
 	void Clear();
 	//加える
 	void Add(std::unique_ptr<ObjectBase> obj);
+	void Del(ObjectBase& object);
 
 	//分回す命令
 	void Draw(Game& g);
@@ -36,5 +38,10 @@ public:
 
 protected:
 	Game& g;
-	std::vector<std::unique_ptr<ObjectBase>>vObj;
+	TypeObjects vObj;
+	TypeObjects vPendingObj;
+	bool updating;
+
+	void DeleteObjects();
+	void AddPendingObjects();
 };

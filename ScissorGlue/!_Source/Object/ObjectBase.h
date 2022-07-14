@@ -7,6 +7,9 @@
  * \date   July 2022
  *********************************************************************/
 
+#include"../Collision/Collision.h"
+#include"../Math/Math.h"
+
 class Game;
 
 //オブジェクトクラス
@@ -18,48 +21,62 @@ public:
 	//デストラクタ
 	virtual ~ObjectBase();
 
+	//種別の列挙
+	enum class Type {
+		kBase,//0ベース
+		kPlayer,//1プレイヤー
+		kBackGround,//2背景
+		kEnemy,//3エネミー
+	};
+	virtual Type GetType() = 0;
 
 	//初期化
-	void Init();
+	virtual void Init();
 	//計算
-	virtual void Process(Game&g);
+	virtual void Process(Game& g);
 	//描画
-	void Draw(Game&g);
+	void Draw(Game& g);
+
+	//AABBを利用したコリジョン周りとその更新
+	virtual void UpDateCollision();
+	virtual void DrawCollision();
+	virtual AABB& GetCollision() { return collision; }
+	virtual Vector2& GetPosition() { return pos; }
+	virtual void SetPosition(Vector2 pPos) { pos = pPos; }
+	virtual Vector2& GetSize() { return size; }
+	virtual void SetSize(Vector2 pSize) { size = pSize; }
+
+	//ダメージ周りの処理に必要なものの追加
+
 
 	//プロセスに含まれる移動周りの計算
 	
-	//移動周りの命令
-	//void GoFoward();
-	//void GoBack();
-	void Gravity();
-	//void Jump();
+	//移動周りの命令//左右移動とジャンプ処理もここに入れるつもりなこと忘れんな！
+	void Gravity(Game& g);
+
 
 public:
 	Game& pGame;
 
-	//画像
-	int cgPic[2];
-	//画像枚数
-	int cgNum;
-	//ワールド座標のXとY
-	int xWorld, yWorld;
-	//描画時の座標
-	int xCamera, yCamera;
-	//画像の縦の大きさと横の大きさ
-	int wPic, hPic;
+	int cgPic[2];//画像
+	int cgNum;	//画像枚数
+	int xWorld, yWorld;	//ワールド座標のXとY
+	int xCamera, yCamera;	//描画時の座標
+	int wPic, hPic;	//画像の縦の大きさと横の大きさ
 
-	//内部蓄積慣性、左から横慣性と縦慣性
-	int besideInertia,verticalInertia;
-	//スピード（横の加速度	//重力の強さ(縦の加速度
-	int besideSpeed,verticalSpeed;
+	int besideInertia,verticalInertia;	//内部蓄積慣性、左から横慣性と縦慣性
+	int besideSpeed,verticalSpeed;	//スピード（横の加速度	//重力の強さ(縦の加速度
 	
-	//接地フラグ0空中1地上
-	int standFlag;
+	int standFlag;	//接地フラグ0空中1地上
 	
-	//当たり判定用
-	int xHit, yHit;
+	int xHit, yHit;	//当たり判定用
 	int wHit, hHit;
+
+protected:
+	AABB collision;//当たり判定
+	Vector2 pos;//座標
+	Vector2 size;//サイズ
+	Vector2 colPos, colSize;//当たり判定の位置とサイズ
 	
-	//動作カウンタ
-	int cnt;
+	int cnt;	//カウント
 };

@@ -30,6 +30,7 @@ public:
 	//デストラクタ
 	~MapChips();
 
+	void Init();
 	//計算
 	void Process(Game& g);
 	//描画

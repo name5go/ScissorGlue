@@ -38,6 +38,12 @@ void Game::Input()
 	//キーのトリガ情報生成
 	CreateKeyTrg();
 }
+//キーのトリガ情報生成。1フレーム前のキーの情報と比較してかつ入力されてるなら
+void Game::CreateKeyTrg() {
+	int oldKey = gKey;
+	gKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+	gTrg = (gKey ^ oldKey) & gKey;
+}
 
 //計算
 void Game::Process() 
@@ -52,15 +58,11 @@ void Game::Render()
 {
 	//画面初期化
 	ClearDrawScreen();
+
 	bg.Draw();
 	mapChips.Draw();
 	pObj.Draw(*this);
+
 	ScreenFlip();
 }
 
-//キーのトリガ情報生成。1フレーム前のキーの情報と比較してかつ入力されてるなら
-void Game::CreateKeyTrg() {
-	int oldKey = gKey;
-	gKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	gTrg = (gKey ^ oldKey) & gKey;
-}

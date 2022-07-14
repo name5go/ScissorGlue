@@ -14,7 +14,8 @@
 
 //コンストラクタ
 ObjectServer::ObjectServer(Game& pGame)
-	:g(pGame)
+	:g(pGame),
+	updating(false)
 {
 }
 //デストラクタ
@@ -22,7 +23,6 @@ ObjectServer::~ObjectServer()
 {
 	Clear();
 }
-
 //ポインタの中身消すやつ
 void ObjectServer::Clear()
 {
@@ -31,10 +31,27 @@ void ObjectServer::Clear()
 //ポインタにクラス追加
 void ObjectServer::Add(std::unique_ptr<ObjectBase>obj)
 {
-	vObj.push_back(std::move(obj));
+	if (updating)
+	{
+		vPendingObj.push_back(std::move(obj));
+	}
+	else
+	{
+		vObj.push_back(std::move(obj));
+	}
 }
 
-//ポインタに追加された命令を回す
+void ObjectServer::AddPendingObjects()
+{
+	vObj.insert(
+		vObj.end(),
+		make_move_iterator(vPendingObj.begin()),
+		make_move_iterator(vPendingObj.end())
+	);
+	vPendingObj.clear();
+}
+
+//ポインタに追加された命令(ProcessとDrawを回す
 void ObjectServer::Process(Game& g)
 {
 	for (auto&& object : vObj)
@@ -42,7 +59,6 @@ void ObjectServer::Process(Game& g)
 		object->Process(g);
 	}
 }
-
 void ObjectServer::Draw(Game& g)
 {
 	for (auto&& object : vObj)

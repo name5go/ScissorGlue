@@ -30,6 +30,7 @@ Player::~Player()
 //ƒvƒŒƒCƒ„[î•ñ‚Ì‰Šú‰»
 void Player::Init()
 {
+	base::Init();
 	cgNum = 1;
 	wPic = 32;
 	hPic = 48;

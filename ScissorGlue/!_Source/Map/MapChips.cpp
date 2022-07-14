@@ -20,9 +20,13 @@
 //マップチップｓクラスのコンストラクタ
 MapChips::MapChips()
 {
+	Init();
+}
+//初期化
+void MapChips::Init()
+{
 	//スクロールの値
-	xScr = 0;
-	yScr = 0;
+	xScr = 0;	yScr = 0;
 }
 
 //マップチップｓのデストラクタ
@@ -62,11 +66,11 @@ void MapChips::Draw()
 					/// 開発用：このチップは当たり判定を行うものか？
 					if (CheckHit(x, y) != 0)
 					{
-						/*
+						
 						SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		// 半透明描画指定
-						DrawBox(pos_x, pos_y, pos_x + _chipW, pos_y + _chipH, GetColor(255, 0, 0), TRUE);	// 半透明の赤で当たり判定描画
+						DrawBox(xPos, yPos, xPos + wChip, yPos + hChip, GetColor(255, 0, 0), TRUE);	// 半透明の赤で当たり判定描画
 						SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		// 不透明描画指定
-						*/
+						
 					}
 				}
 			}
