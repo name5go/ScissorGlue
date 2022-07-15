@@ -6,6 +6,7 @@
  * \date   July 2022
  *********************************************************************/
 
+
 #include<DxLib.h>
 #include"ObjectBase.h"
 #include"../Aplication/Game.h"
