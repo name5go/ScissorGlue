@@ -1,6 +1,12 @@
 /*****************************************************************//**
  * \file   winmain.cpp
- * \brief  エントリーポイント
+ * \brief  流れとしては
+ * エントリーポイント
+ * Gameクラスの
+ * Input
+ * Process
+ * Render
+ * をescキー押下までループさせ続ける
  * 
  * \author mezashi
  * \date   June 2022

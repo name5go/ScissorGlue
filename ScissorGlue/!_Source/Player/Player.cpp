@@ -32,14 +32,14 @@ void Player::Init()
 {
 	base::Init();
 	cgNum = 1;
-	size.x = 32;size.y= 48;//画像の大きさxy
+	size.x = 50;size.y= 50;//画像の大きさxy
 	pos.x = 32;pos.y = 0;//xy座標
 	xCamera = wPic / 2;yCamera = hPic + 1;//基準位置から描画時の差分
 	besideInertia = 0;verticalInertia = 0;//横と縦の慣性
 	colPos.x = 0; colPos.y = 0;//当たり判定の座標
-	colSize.x = 32; colSize.y = 48;//当たり判定の大きさ
+	colSize.x = 55; colSize.y = 55;//当たり判定の大きさ
 	/**
-	 * 	当たり判定更新の計算(場所はobjectBase)
+	 * 	参考用、当たり判定更新の計算(場所はobjectBase)
 	 * 
 	 * collision.min = pos + colPos;
 	 * collision.max = pos + colPos + colSize;.
@@ -52,12 +52,15 @@ void Player::Process(Game& g)
 {
 	CheckInput(g);
 	ObjectBase::Process(g);
-	ObjectBase::UpdateCollision();
+	ObjectBase::UpdateCollision();//当たり判定の更新
+	ObjectBase::DrawCollision();//開発用当たり判定表示
 
 	// 主人公位置からのカメラ座標決定
 	g.mapChips.xScr = pos.x - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
 	g.mapChips.yScr = pos.y - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
 }
+
+
 
 void Player::CheckInput(Game& g)
 {
@@ -80,13 +83,10 @@ void Player::CheckInput(Game& g)
 	//右押されてたら右方向
 	if (g.gKey & PAD_INPUT_RIGHT || g.gKey & D_KEY)
 	{
-
 		//ボタンを押された時の処理
-		//描画の反転をオン
 		pos.x += 1;
 		g.mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
 	}
-
 	//g.gKey & PAD_INPUT_A ||
 	//ジャンプ
 	if (g.gTrg & W_KEY)

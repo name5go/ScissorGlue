@@ -13,6 +13,7 @@
 #include"../Object/ObjectBase.h"
 #include"../Collision/Collision.h"
 #include"../Math/Math.h"
+#include"../Player/Player.h"
 
 #include<memory>
 #include<fstream>
@@ -34,9 +35,23 @@ MapChips::~MapChips()
 {
 }
 
+//当たり判定更新
+void MapChips:: UpdateMapCol()
+{
+	mapCol.min = mapPos;
+	mapCol.max = mapPos + mapSize;
+}
+//当たり判定描画
+void MapChips:: DrawMapCol()
+{
+	mapCol.DrawBoxCol(rand() % 256, rand() % 256, rand() % 256);
+}
+
+
 //計算
 void MapChips::Process(Game& g)
 {
+	UpdateMapCol();
 	//カメラがマップデータを超えないようにする
 	if (xScr < 0) { xScr = 0; }
 	if (xScr > wMap * wChip - SCREEN_W) { xScr = wMap * wChip - SCREEN_W; }
@@ -54,23 +69,19 @@ void MapChips::Draw()
 		{
 			for (x = 0; x < wMap; x++)
 			{
-				int xPos = x * wChip - xScr;
-				int yPos = y * hChip - yScr;
+				mapPos.x = x * wChip - xScr;
+				mapPos.y = y * hChip - yScr;
 				int noChip = vMap[layer][y][x].idMapChip;
 
 				noChip--;
 				if (noChip >= 0)
 				{
-					DrawGraph(xPos, yPos, vCgChip[noChip], TRUE);
+					DrawGraph(mapPos.x, mapPos.y, vCgChip[noChip], TRUE);
 
 					/// 開発用：このチップは当たり判定を行うものか？
 					if (CheckHit(x, y) != 0)
 					{
-						/*
-						SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		// 半透明描画指定
-						DrawBox(xPos, yPos, xPos + wChip, yPos + hChip, GetColor(255, 0, 0), TRUE);	// 半透明の赤で当たり判定描画
-						SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		// 不透明描画指定
-						*/
+						DrawMapCol();
 					}
 				}
 			}
@@ -126,50 +137,7 @@ int MapChips::CheckHit(int x, int y)
 
 int MapChips::IsHit(ObjectBase& o, int mx, int my)
 {
-	int x, y;
-
-	// キャラ矩形を作成する
-	int l, t, r, b;		// 左上(left,top) - 右下(right,bottom)
-	l = o.xWorld + o.xHit;
-	t = o.yWorld + o.yHit;
-	r = o.xWorld + o.xHit + o.wHit - 1;
-	b = o.yWorld + o.yHit + o.hHit - 1;
-
-	// キャラの左上座標～右下座標にあたるマップチップと、当たり判定を行う
-	for (y = t / hChip; y <= b / hChip; y++)
-	{
-		for (x = l / wChip; x <= r / wChip; x++)
-		{
-			// (x,y)は、マップチップの座標（チップ単位）
-			// この位置のチップは当たるか？
-			int noChip = CheckHit(x, y);
-			if (noChip != 0)
-			{	// このチップと当たった。
-				// X,Yの移動方向を見て、その反対方向に補正する
-				if (mx < 0)
-				{	// 左に動いていたので、右に補正
-					o.xWorld = x * wChip + wChip - (o.xHit);
-				}
-				if (mx > 0)
-				{	// 右に動いていたので、左に補正
-					o.xWorld = x * wChip - (o.xHit + o.wHit);
-				}
-				if (my > 0)
-				{	// 下に動いていたので、上に補正
-					o.yWorld = y * hChip - (o.yHit + o.hHit);
-				}
-				if (my < 0)
-				{	// 上に動いていたので、下に補正
-					o.yWorld = y * hChip + hChip - (o.yWorld);
-				}
-				// 当たったので戻る
-				return 1;
-			}
-		}
-	}
-
-	// 当たらなかった
-	return 0;
+	for(auto&&)
 }
 
 //ロードジェイソン

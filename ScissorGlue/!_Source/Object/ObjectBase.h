@@ -77,13 +77,12 @@ public:
 protected:
 	Game& pGame;
 	bool dead;
+	float spd;//速度
+	int cnt;	//カウント
 
+	Vector2 size;//画像のサイズ
+	//当たり判定に必要
 	AABB collision;//当たり判定
 	Vector2 pos;//座標
-	Vector2 size;//サイズ
 	Vector2 colPos, colSize;//当たり判定の位置とサイズ
-
-	float spd;//速度
-	
-	int cnt;	//カウント
 };

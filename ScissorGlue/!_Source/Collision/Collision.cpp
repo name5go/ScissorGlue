@@ -37,6 +37,11 @@ void AABB::Draw(int red, int green, int blue) const {
 	DrawBoxAA(min.x, min.y, max.x, max.y, GetColor(red, green, blue), FALSE);
 }
 
+// AABB‚Ì•`‰æ
+void AABB::DrawBoxCol(int red, int green, int blue) const {
+	DrawBox(min.x, min.y, max.x, max.y, GetColor(red, green, blue), TRUE);
+}
+
 // ü•ª‚Ì•`‰æ
 void LineSegment::Draw(int red, int green, int blue) const {
 	DrawLineAA(start.x, start.y, end.x, end.y, GetColor(red, green, blue), 5);

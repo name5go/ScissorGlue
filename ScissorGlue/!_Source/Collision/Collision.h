@@ -17,6 +17,7 @@ public:
 	Vector2 min;
 	Vector2 max;
 	void Draw(int red, int green, int blue) const;
+	void DrawBoxCol(int red, int green, int blue) const;
 };
 
 // AABB‚ÆAABB‚ÌŒğ·”»’è
