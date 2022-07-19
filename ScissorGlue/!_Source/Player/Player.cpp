@@ -32,33 +32,31 @@ void Player::Init()
 {
 	base::Init();
 	cgNum = 1;
-	wPic = 32;
-	hPic = 48;
-	xWorld = 32;
-	yWorld = 0;
-	xCamera = wPic / 2;
-	yCamera = hPic + 1;
-	besideInertia = 0;
-	verticalInertia = 0;
-	xHit = -16;
-	yHit = -47;
-	wHit = 32;
-	hHit = 48;
+	size.x = 32;size.y= 48;//画像の大きさxy
+	pos.x = 32;pos.y = 0;//xy座標
+	xCamera = wPic / 2;yCamera = hPic + 1;//基準位置から描画時の差分
+	besideInertia = 0;verticalInertia = 0;//横と縦の慣性
+	colPos.x = 0; colPos.y = 0;//当たり判定の座標
+	colSize.x = 32; colSize.y = 48;//当たり判定の大きさ
+	/**
+	 * 	当たり判定更新の計算(場所はobjectBase)
+	 * 
+	 * collision.min = pos + colPos;
+	 * collision.max = pos + colPos + colSize;.
+	 * 
+	 */
 }
 
 //入力
 void Player::Process(Game& g)
 {
-
 	CheckInput(g);
 	ObjectBase::Process(g);
+	ObjectBase::UpdateCollision();
 
 	// 主人公位置からのカメラ座標決定
-	g.mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
-	g.mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
-	
-
-
+	g.mapChips.xScr = pos.x - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
+	g.mapChips.yScr = pos.y - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
 }
 
 void Player::CheckInput(Game& g)
@@ -75,7 +73,7 @@ void Player::CheckInput(Game& g)
 	if (g.gKey & PAD_INPUT_LEFT || g.gKey & A_KEY)
 	{
 		//ボタンを押された時の処理
-		xWorld -= 1;
+		pos.x -= 1;
 		g.mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
 	}
 
@@ -85,7 +83,7 @@ void Player::CheckInput(Game& g)
 
 		//ボタンを押された時の処理
 		//描画の反転をオン
-		xWorld += 1;
+		pos.x += 1;
 		g.mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
 	}
 

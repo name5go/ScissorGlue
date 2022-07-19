@@ -38,7 +38,7 @@ public:
 	void Draw(Game& g);
 
 	//AABBを利用したコリジョン周りとその更新
-	virtual void UpDateCollision();
+	virtual void UpdateCollision();
 	virtual void DrawCollision();
 	virtual AABB& GetCollision() { return collision; }
 	virtual Vector2& GetPosition() { return pos; }

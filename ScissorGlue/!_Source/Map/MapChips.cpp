@@ -66,11 +66,11 @@ void MapChips::Draw()
 					/// 開発用：このチップは当たり判定を行うものか？
 					if (CheckHit(x, y) != 0)
 					{
-						
+						/*
 						SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		// 半透明描画指定
 						DrawBox(xPos, yPos, xPos + wChip, yPos + hChip, GetColor(255, 0, 0), TRUE);	// 半透明の赤で当たり判定描画
 						SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		// 不透明描画指定
-						
+						*/
 					}
 				}
 			}

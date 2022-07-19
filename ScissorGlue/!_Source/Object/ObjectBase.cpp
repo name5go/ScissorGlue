@@ -26,10 +26,10 @@ ObjectBase::~ObjectBase()
 //初期化
 void ObjectBase::Init()
 {
-	pos.x = 0; pos.y = 0;
-	colPos.x = 0; colPos.y = 0;
-	colSize.x = 0; colSize.y = 0;
-	cnt = 0;
+	pos.x = 0; pos.y = 0;//描画座標のリセット
+	colPos.x = 0; colPos.y = 0;//コリジョンの座標リセット
+	colSize.x = 0; colSize.y = 0;//当たり判定の大きさリセット
+	cnt = 0;//カウント
 }
 //計算
 void ObjectBase::Process(Game& g)
@@ -51,7 +51,7 @@ void ObjectBase::Gravity(Game& g)
 		verticalInertia = 0;
 	}
 	verticalInertia += 1;
-	yWorld += verticalInertia;
+	pos.y += verticalInertia;
 	standFlag = 0;
 }
 
@@ -60,14 +60,14 @@ void ObjectBase::Draw(Game& g)
 {
 	//ワールドの座標からカメラで見た座標に変更
 	int x, y;	//画面上に描画する座標
-	x = xWorld + xCamera - g.mapChips.xScr;
-	y = yWorld + yCamera - g.mapChips.yScr;
+	x = pos.x + xCamera - g.mapChips.xScr;
+	y = pos.y + yCamera - g.mapChips.yScr;
 	//変更した座標に描画
 	DrawGraph(x, y, cgPic[(cnt / 8) % cgNum], TRUE);
 }
 
 //当たり判定の更新
-void ObjectBase::UpDateCollision()
+void ObjectBase::UpdateCollision()
 {
 	collision.min = pos + colPos;
 	collision.max = pos + colPos + colSize;

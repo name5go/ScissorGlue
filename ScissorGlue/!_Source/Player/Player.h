@@ -18,6 +18,7 @@ public:
 	Player(Game& g);
 	//デストラクタ
 	~Player();
+	virtual Type	GetType() { return Type::kPlayer; }
 
 	void Init();
 	void Process(Game& g) override;
