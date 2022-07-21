@@ -1,5 +1,11 @@
 # ScissorGlue
-DXライブラリを使用したブロック崩しを製作します。
+描画情報の切り貼りを用いてステージ攻略を目指す2D横スクロールゲーム「シザーグルー」の開発リポジトリです。
+
+コーディングルール
+命名規則について
+関数名　アッパーキャメルケース　例　scissor glue→　ScissorGlue
+変数名　ローワーキャメルケース　例　scissor glue→　scissorGlue
+ポインタ名　スネークケース　例　scissor glue→　_scissor_glue
 
 doxygen　Javadocスタイルによるコメントを書く。
 
@@ -29,11 +35,6 @@ int a {0}
 
 int a {0};//<変数の説明(直後にコメントを書く場合は'<'を入れる)
 そのほか、便利そうなところには/**~*/とか@briefでコメントを入れとく
-
-命名規則
-関数名、クラス名、メゾッド名 ・ アッパーキャメル 例　UnkoUnchiChingching
-変数　int position xPosition
-　ロウワーキャメルケース ローカル変数・引数　小文字 例unkoUnchiChingching
 
 フォルダ分け ヘッダーファイルとソースファイルは同一のフィルタでまとめる
 
