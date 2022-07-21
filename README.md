@@ -3,9 +3,16 @@
 
 コーディングルール
 命名規則について
-関数名とクラス名　アッパーキャメルケース　例　scissor glue→　ScissorGlue
-変数名　ローワーキャメルケース　例　scissor glue→　scissorGlue
-ポインタ名　スネークケース　例　scissor glue→　_scissor_glue
+
+!関数名とクラス名　アッパーキャメルケース　
+例　scissor glue→　ScissorGlue
+
+!変数名　ローワーキャメルケース　
+例　scissor glue→　scissorGlue
+
+!ポインタ名　スネークケース　
+例　scissor glue→　_scissor_glue
+
 
 doxygen　Javadocスタイルによるコメントを書く。
 
