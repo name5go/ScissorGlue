@@ -18,22 +18,27 @@ class ObjectBase;
 class ObjectServer
 {
 public:
-	//コンストラクタ
-	ObjectServer(Game& pGame);
-	//コンストラクタ
+	ObjectServer();
 	~ObjectServer();
 
-	//消すやつ
-	void Clear();
-	//加える
-	void Add(std::unique_ptr<ObjectBase> obj);
+	void	Clear();
+	void	Add(ObjectBase* obj);
+	void	Del(ObjectBase* obj);
 
-	//分回す命令
-	void Draw(Game& g);
-	void Process(Game& g);
+	void	Process(Game& g);
+	void	Draw(Game& g);
 
+	std::vector<ObjectBase*>* List() { return &_vObject; }
+
+private:
+	void	AddListObjects();
+	void	DelListObjects();
 
 protected:
-	Game& g;
-	std::vector<std::unique_ptr<ObjectBase>>vObj;
+	std::vector<ObjectBase*>	_vObject;		// ObjectBaseを登録するリスト
+
+	std::vector<ObjectBase*>	_vAdd;	// 追加するオブジェクトリスト
+	std::vector<ObjectBase*>	_vDel;	// 削除するオブジェクトリスト
+
+
 };

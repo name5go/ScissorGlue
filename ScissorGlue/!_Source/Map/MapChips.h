@@ -33,7 +33,7 @@ public:
 	//ŒvZ
 	void Process(Game& g);
 	//•`‰æ
-	void Draw();
+	void Draw(Game& g);
 
 	//Õ“Ë’²¸
 	int CheckHit(int x, int y);

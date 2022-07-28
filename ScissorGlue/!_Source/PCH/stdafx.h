@@ -9,7 +9,7 @@
  *********************************************************************/
 
  /**
-	コピペ用
+	インクルードのコピペ用
 #include"../PCH/stdafx.h"
 #include<winsock.h>
 
@@ -23,11 +23,13 @@
 #include<memory>
 #include<vector>
 #include<cmath>
+#include <array>
 #include<limits>
 #include<unordered_map>
 #include<string>
 #include<fstream>
 #include<sstream>
+#include"../picojson/picojson.h"//picojson.h
 
 //ヘッダーのインクルード
 #include"../Aplication/Game.h"//ゲームヘッダー

@@ -6,8 +6,7 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"../PCH/stdafx.h"
-#include<winsock.h>
+#include"MapChips.h"
 
 //マップチップｓクラスのコンストラクタ
 MapChips::MapChips()
@@ -33,7 +32,7 @@ void MapChips::Process(Game& g)
 }
 
 //描画
-void MapChips::Draw()
+void MapChips::Draw(Game& g)
 {
 	int x, y, layer;
 	for (layer = 0; layer < vMap.size(); layer++)

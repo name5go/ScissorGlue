@@ -1,8 +1,17 @@
+#pragma once
 /*****************************************************************//**
- * \file   SoundServer.cpp
+ * \file   Scissor.h
  * \brief  
  * 
  * \author ‚ß‚´‚µ
  * \date   July 2022
  *********************************************************************/
-#include"SoundServer.h"
+
+#include"../PCH/stdafx.h"
+#include<winsock.h>
+
+class Scissor
+{
+public:
+
+};

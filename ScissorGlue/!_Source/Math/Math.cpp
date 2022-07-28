@@ -8,6 +8,5 @@
  * Copyright(C) Amusement Media Academy All rights Resved.
  */
 
-#include"../PCH/stdafx.h"
-#include<winsock.h>
+#include"Math.h"
 
