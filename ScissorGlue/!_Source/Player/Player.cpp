@@ -43,7 +43,7 @@ void Player::Init()
 //“ü—Í
 void Player::Process(Game& g)
 {
-
+	UpdatePlayerPos();
 	CheckInput(g);
 	ObjectBase::Process(g);
 

@@ -23,6 +23,13 @@ public:
 
 	void Init();//初期化
 	void Process(Game& g);//プロセス
-  void CheckInput(Game& g);
+  void CheckInput(Game& g);//入力
+
+
+	void UpdatePlayerPos() { int xPl = xWorld; int yPl = yWorld; }
+
+public:
+	//左右の向きフラグ1右-1左
+	int LeftRight;
 
 };

@@ -19,6 +19,7 @@ Game::Game()
 	//各種クラスを追加
 		// プレイヤーを生成し、オブジェクトサーバに登録する
 	_obj.Add(new Player());
+	_obj.Add(new Scissor());
 }
 
 //デストラクタ
