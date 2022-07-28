@@ -6,47 +6,97 @@
  * \date   July 2022
  *********************************************************************/
 
-#include<DxLib.h>
 #include"ObjectServer.h"
-#include"ObjectBase.h"
-#include"../Aplication/Game.h"
 
 
 //コンストラクタ
-ObjectServer::ObjectServer(Game& pGame)
-	:g(pGame)
+ObjectServer::ObjectServer()
 {
+	_vObject.clear();
+	_vAdd.clear();
+	_vDel.clear();
 }
-//デストラクタ
+
 ObjectServer::~ObjectServer()
 {
 	Clear();
 }
 
-//ポインタの中身消すやつ
-void ObjectServer::Clear()
+// リストに登録されているオブジェクトをすべて消す
+void	ObjectServer::Clear()
 {
-	vObj.clear();
-}
-//ポインタにクラス追加
-void ObjectServer::Add(std::unique_ptr<ObjectBase>obj)
-{
-	vObj.push_back(std::move(obj));
-}
-
-//ポインタに追加された命令を回す
-void ObjectServer::Process(Game& g)
-{
-	for (auto&& object : vObj)
+	for (auto ite = _vObject.begin(); ite != _vObject.end(); ite++)
 	{
-		object->Process(g);
+		delete (*ite);
 	}
+	_vObject.clear();
 }
 
-void ObjectServer::Draw(Game& g)
+// Addリストにオブジェクトを登録する
+void	ObjectServer::Add(ObjectBase* obj)
 {
-	for (auto&& object : vObj)
+	_vAdd.push_back(obj);
+}
+
+// Delリストにオブジェクトを登録する
+void	ObjectServer::Del(ObjectBase* obj)
+{
+	_vDel.push_back(obj);
+}
+
+// Addリストのオブジェクトを追加する
+void	ObjectServer::AddListObjects()
+{
+	for (auto iteAdd = _vAdd.begin(); iteAdd != _vAdd.end(); iteAdd++)
 	{
-		object->Draw(g);
+		_vObject.push_back((*iteAdd));
+	}
+	_vAdd.clear();
+}
+
+// Delリストのオブジェクトを削除する
+void	ObjectServer::DelListObjects()
+{
+	for (auto iteDel = _vDel.begin(); iteDel != _vDel.end(); iteDel++)
+	{
+		for (auto ite = _vObject.begin(); ite != _vObject.end();)
+		{
+			if ((*ite) == (*iteDel))
+			{
+				delete (*ite);
+				ite = _vObject.erase(ite);
+			}
+			else
+			{
+				ite++;
+			}
+		}
+	}
+	_vDel.clear();
+}
+
+
+// Process()を登録順に回す
+void	ObjectServer::Process(Game& g)
+{
+	// Addリストにあるオブジェクトをリストに登録する
+	AddListObjects();
+
+	// Process()の呼び出し
+	for (auto ite = _vObject.begin(); ite != _vObject.end(); ite++)
+	{
+		(*ite)->Process(g);
+	}
+
+	// Delリストにあるオブジェクトをリストから削除する
+	DelListObjects();
+}
+
+// Draw()を登録順に回す
+void	ObjectServer::Draw(Game& g)
+{
+	for (auto ite = _vObject.begin(); ite != _vObject.end(); ite++)
+	{
+		(*ite)->Draw(g);
 	}
 }

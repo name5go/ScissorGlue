@@ -5,26 +5,20 @@
  * \author めざし
  * \date   June 2022a
  *********************************************************************/
-
-#include"DxLib.h"
 #include"Game.h"
-#include<memory>
-
- //プレイヤークラスのポインタ生成
-
 
 //コンストラクタ
-Game::Game():pObj(*this)
+Game::Game()
 {
 	gKey = 0;
 	gFrameCount = 0;
 	gTrg = 0;
 
 	// jsonからマップデータを構築する
-	mapChips.LoadJson("!_Resources\\!_Pic\\mapchips\\", "map01.json");
-	//各種クラスをポインタに追加
-	auto player = std::make_unique<Player>(*this);
-	pObj.Add(std::move(player));
+	_mapChips.LoadJson("!_Resources\\!_Pic\\mapchips\\", "map01.json");
+	//各種クラスを追加
+		// プレイヤーを生成し、オブジェクトサーバに登録する
+	_obj.Add(new Player());
 }
 
 //デストラクタ
@@ -42,8 +36,8 @@ void Game::Input()
 //計算
 void Game::Process() 
 {
-	pObj.Process(*this);
-	mapChips.Process(*this);
+	_obj.Process(*this);//オブジェクトサーバー
+	_mapChips.Process(*this);//マップチップ
 	gFrameCount++;
 }
 
@@ -52,9 +46,9 @@ void Game::Render()
 {
 	//画面初期化
 	ClearDrawScreen();
-	bg.Draw();
-	mapChips.Draw();
-	pObj.Draw(*this);
+	_bg.Draw();//背景描画
+	_mapChips.Draw(*this);//マップチップ
+	_obj.Draw(*this);//オブジェクトサーバー
 	ScreenFlip();
 }
 

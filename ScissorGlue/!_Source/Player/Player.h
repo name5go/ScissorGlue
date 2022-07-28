@@ -6,23 +6,23 @@
  * \author めざし
  * \date   July 2022
  *********************************************************************/
-#include"../Object/ObjectBase.h"
+#include"../PCH/stdafx.h"
+#include<winsock.h>
+#include"../Object/ObjectBase.h"//オブジェクトベース
 
 class Game;
 
 class Player:public ObjectBase
 {
-	typedef ObjectBase base;
 public:
 	//コンストラクタ
-	Player(Game& g);
+	Player();
 	//デストラクタ
 	~Player();
+	virtual OBJECTTYPE GetType() { return ObjectBase::OBJECTTYPE::PLAYER; }
 
-	void Init();
-	void Process(Game& g) override;
+	void Init();//初期化
+	void Process(Game& g);//プロセス
   void CheckInput(Game& g);
-
-private:
 
 };

@@ -8,8 +8,8 @@
  *
  * Copyright(C) Amusement Media Academy All rights Resved.
  */
-#include <cmath>
-#include <limits>
+#include"../PCH/stdafx.h"
+#include<winsock.h>
 
 namespace Math {
   // (1-2)‰~Žü—¦

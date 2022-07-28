@@ -6,16 +6,7 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"DxLib.h"
 #include"MapChips.h"
-#include"../Object/ImageServer.h"
-#include"../Aplication/Game.h"
-#include"../Object/ObjectBase.h"
-#include"../Collision/Collision.h"
-#include"../Math/Math.h"
-
-#include<memory>
-#include<fstream>
 
 //マップチップｓクラスのコンストラクタ
 MapChips::MapChips()
@@ -41,7 +32,7 @@ void MapChips::Process(Game& g)
 }
 
 //描画
-void MapChips::Draw()
+void MapChips::Draw(Game& g)
 {
 	int x, y, layer;
 	for (layer = 0; layer < vMap.size(); layer++)

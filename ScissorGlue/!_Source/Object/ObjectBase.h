@@ -6,25 +6,33 @@
  * \author めざし
  * \date   July 2022
  *********************************************************************/
-
-class Game;
+#include"../PCH/stdafx.h"
+#include<winsock.h>
 
 //オブジェクトクラス
 class ObjectBase
 {
 public:
 	//コンストラクタ
-	ObjectBase(Game& g);
+	ObjectBase();
 	//デストラクタ
-	virtual ~ObjectBase();
+	~ObjectBase();
 
+	enum class OBJECTTYPE
+	{
+		PLAYER,
+		SCISSOR,
+	};
+	virtual OBJECTTYPE GetType() = 0;
 
 	//初期化
-	void Init();
+	virtual void Init();
 	//計算
 	virtual void Process(Game&g);
 	//描画
-	void Draw(Game&g);
+	virtual void Draw(Game&g);
+
+	
 
 	//プロセスに含まれる移動周りの計算
 	
@@ -35,10 +43,9 @@ public:
 	//void Jump();
 
 public:
-	Game& pGame;
 
 	//画像
-	int cgPic[2];
+	int cgPic[32];
 	//画像枚数
 	int cgNum;
 	//ワールド座標のXとY
@@ -55,6 +62,8 @@ public:
 	
 	//接地フラグ0空中1地上
 	int standFlag;
+	//左右の向きフラグ1右-1左
+	int LeftRight;
 	
 	//当たり判定用
 	int xHit, yHit;

@@ -55,6 +55,15 @@
     <Filter Include="ヘッダー ファイル\BackGround">
       <UniqueIdentifier>{81382926-a549-4b9d-ac81-b859e7db7aaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\pch">
+      <UniqueIdentifier>{4fa698af-e7d5-4999-a79f-6ccd36a0fa96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\PCH">
+      <UniqueIdentifier>{c7563060-c8cf-4626-b41a-634828e773ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\picojson">
+      <UniqueIdentifier>{4be880a3-0981-426b-aec4-d7f5746fa1ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="!_Source\Aplication\Winmain.cpp">
@@ -90,6 +99,12 @@
     <ClCompile Include="!_Source\BackGround\BackGround.cpp">
       <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
+    <ClCompile Include="!_Source\PCH\pch.cpp">
+      <Filter>ソース ファイル\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="!_Source\Player\Scissor.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="!_Source\Aplication\Game.h">
@@ -121,6 +136,15 @@
     </ClInclude>
     <ClInclude Include="!_Source\BackGround\BackGround.h">
       <Filter>ヘッダー ファイル\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\PCH\stdafx.h">
+      <Filter>ヘッダー ファイル\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\picojson\picojson.h">
+      <Filter>ヘッダー ファイル\picojson</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\Player\Scissor.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

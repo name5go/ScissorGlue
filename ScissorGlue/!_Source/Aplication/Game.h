@@ -1,3 +1,4 @@
+#pragma once
 /*****************************************************************//**
  * \file   Game.h
  * \brief  ゲームクラス
@@ -6,12 +7,11 @@
  * \date   June 2022
  *********************************************************************/
 
-#pragma once
-
-#include"../Player/Player.h"
-#include	"../Object/ObjectServer.h"
-#include	"../BackGround/BackGround.h"
-#include	"../Map/MapChips.h"
+#include"../PCH/stdafx.h"
+#include<winsock.h>
+#include"../BackGround/BackGround.h"//バックグラウンド
+#include"../Map/MapChips.h"//マップチップヘッダー
+#include"../Object/ObjectServer.h"//オブジェクトサーバー
 
 //画面設定
 constexpr auto SCREEN_W = 1280;		//< 画面の横解像度
@@ -19,7 +19,7 @@ constexpr auto SCREEN_H = 720;		//< 画面の縦解像度
 constexpr auto SCREEN_DEPTH = 32;   ///< １ドットあたりのビット数
 
 //ゲームクラス
-class Game 
+class Game
 {
 public:
 	//コンストラクタ
@@ -33,6 +33,8 @@ public:
 	void Process();
 	//描画
 	void Render();
+
+
 	//キー情報の生成
 	void CreateKeyTrg();
 
@@ -43,10 +45,11 @@ public:
 	//フレームカウント
 	int gFrameCount;
 
-	BackGround bg;
-	MapChips mapChips;
+	// 背景
+	BackGround	_bg;
+	// マップチップ
+	MapChips	_mapChips;
+	// オブジェクトサーバ
+	ObjectServer	_obj;
 
-protected:
-	ObjectServer pObj;
-	
 };

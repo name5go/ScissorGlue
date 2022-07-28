@@ -1,21 +1,15 @@
 /*****************************************************************//**
  * \file   Player.cpp
- * \brief  プレイヤークラスの処理内容
+ * \brief  プレイヤークラス
  * 
  * \author めざし
  * \date   July 2022
  *********************************************************************/
 
-#include<DxLib.h>
 #include"Player.h"
-#include"Math.h"
-#include"../Aplication/Game.h"
-#include"../Object/ImageServer.h"
-#include"../Object/ImageServer.h"
 
 //コンストラクタ
-Player::Player(Game& g)
-	:base(g)
+Player::Player()
 {
 	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換える
 	cgPic[0] = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
@@ -30,6 +24,7 @@ Player::~Player()
 //プレイヤー情報の初期化
 void Player::Init()
 {
+	LeftRight = 1;
 	cgNum = 1;
 	wPic = 32;
 	hPic = 48;
@@ -53,8 +48,8 @@ void Player::Process(Game& g)
 	ObjectBase::Process(g);
 
 	// 主人公位置からのカメラ座標決定
-	g.mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
-	g.mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
+	g._mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
+	g._mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
 	
 
 
@@ -73,19 +68,20 @@ void Player::CheckInput(Game& g)
 	//左押されてたら左方向
 	if (g.gKey & PAD_INPUT_LEFT || g.gKey & A_KEY)
 	{
+		LeftRight = -1;
 		//ボタンを押された時の処理
 		xWorld -= 1;
-		g.mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
+		g._mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
 	}
 
 	//右押されてたら右方向
 	if (g.gKey & PAD_INPUT_RIGHT || g.gKey & D_KEY)
 	{
-
+		LeftRight = 1;
 		//ボタンを押された時の処理
 		//描画の反転をオン
 		xWorld += 1;
-		g.mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
+		g._mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
 	}
 
 	//g.gKey & PAD_INPUT_A ||

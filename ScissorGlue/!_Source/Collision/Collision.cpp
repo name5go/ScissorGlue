@@ -6,9 +6,7 @@
  * \date   July 2022
  *********************************************************************/
 
-#include "Collision.h"
-#include "DxLib.h"
-#include <sstream>
+#include"Collision.h"
 
 
 // AABB‚ÌŒğ·”»’è

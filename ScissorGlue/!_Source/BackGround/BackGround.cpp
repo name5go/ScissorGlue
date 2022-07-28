@@ -6,9 +6,7 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"DxLib.h"
 #include"BackGround.h"
-#include"../Object/ImageServer.h"
 
 //コンストラクタ
 BackGround::BackGround()

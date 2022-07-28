@@ -1,8 +1,9 @@
 /*****************************************************************//**
- * \file   SoundServer.cpp
+ * \file   Scissor.cpp
  * \brief  
  * 
  * \author ‚ß‚´‚µ
  * \date   July 2022
  *********************************************************************/
-#include"SoundServer.h"
+#include"../Player/Scissor.h"
+

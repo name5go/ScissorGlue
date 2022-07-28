@@ -6,14 +6,10 @@
  * \date   July 2022
  *********************************************************************/
 
-#include<DxLib.h>
 #include"ObjectBase.h"
-#include"../Aplication/Game.h"
-#include"../Player/Player.h"
 
 //コンストラクタ
-ObjectBase::ObjectBase(Game& g)
-	:pGame(g)
+ObjectBase::ObjectBase()
 {
 	Init();
 }
@@ -31,10 +27,10 @@ void ObjectBase::Init()
 //計算
 void ObjectBase::Process(Game& g)
 {
-	
-	
+	//接触していないなら重力処理を行う
+	Gravity();
 	//重力処理と当たり判定
-	if (g.mapChips.IsHit(*this, 0, verticalInertia) != 0)
+	if (g._mapChips.IsHit(*this, 0, verticalInertia) != 0)
 	{
 		if (verticalInertia > 0)
 		{
@@ -42,14 +38,17 @@ void ObjectBase::Process(Game& g)
 		}
 		verticalInertia = 0;
 	}
-	//接触していないなら重力処理を行う
-	else
-	{
-		Gravity();
-	}
 	//カウントプラス
 	cnt++;
 }
+void ObjectBase::Gravity()
+{
+	verticalInertia += 1;
+	yWorld += verticalInertia;
+	standFlag = 0;
+}
+
+
 
 //描画
 void ObjectBase::Draw(Game& g)
@@ -58,12 +57,10 @@ void ObjectBase::Draw(Game& g)
 	//ワールドの座標からカメラで見た座標に変更
 	//画面上に描画する座標
 	int x, y;
-	x = xWorld + xCamera - g.mapChips.xScr;
-	y = yWorld + yCamera - g.mapChips.yScr;
+	x = xWorld + xCamera - g._mapChips.xScr;
+	y = yWorld + yCamera - g._mapChips.yScr;
 	//変更した座標に描画
 	DrawGraph(x, y, cgPic[(cnt / 8) % cgNum], TRUE);
-
-
 
 	// 開発用。当たり判定を表示する
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		// 半透明描画指定
@@ -72,9 +69,3 @@ void ObjectBase::Draw(Game& g)
 
 }
 
-void ObjectBase::Gravity()
-{
-	verticalInertia += 1;
-	yWorld += verticalInertia;
-	standFlag = 0;
-}

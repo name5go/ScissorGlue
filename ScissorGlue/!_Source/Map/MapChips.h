@@ -7,8 +7,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"../picojson/picojson.h"
-#include<string>
+#include"../PCH/stdafx.h"
+#include<winsock.h>
 
 class Game;
 class ObjectBase;
@@ -33,7 +33,7 @@ public:
 	//åvéZ
 	void Process(Game& g);
 	//ï`âÊ
-	void Draw();
+	void Draw(Game& g);
 
 	//è’ìÀí≤ç∏
 	int CheckHit(int x, int y);

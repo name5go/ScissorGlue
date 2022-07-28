@@ -7,7 +7,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include	<unordered_map>
+#include"../PCH/stdafx.h"
+#include<winsock.h>
 
 class ImageServer
 {
