@@ -6,16 +6,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"DxLib.h"
-#include"MapChips.h"
-#include"../Object/ImageServer.h"
-#include"../Aplication/Game.h"
-#include"../Object/ObjectBase.h"
-#include"../Collision/Collision.h"
-#include"../Math/Math.h"
-
-#include<memory>
-#include<fstream>
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 //マップチップｓクラスのコンストラクタ
 MapChips::MapChips()

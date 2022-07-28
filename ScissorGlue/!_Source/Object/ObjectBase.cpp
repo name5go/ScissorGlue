@@ -6,10 +6,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include<DxLib.h>
-#include"ObjectBase.h"
-#include"../Aplication/Game.h"
-#include"../Player/Player.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 //コンストラクタ
 ObjectBase::ObjectBase(Game& g)

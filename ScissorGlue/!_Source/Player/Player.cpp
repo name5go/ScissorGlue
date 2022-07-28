@@ -6,12 +6,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include<DxLib.h>
-#include"Player.h"
-#include"Math.h"
-#include"../Aplication/Game.h"
-#include"../Object/ImageServer.h"
-#include"../Object/ImageServer.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 //コンストラクタ
 Player::Player(Game& g)

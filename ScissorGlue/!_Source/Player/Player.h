@@ -6,7 +6,8 @@
  * \author ‚ß‚´‚µ
  * \date   July 2022
  *********************************************************************/
-#include"../Object/ObjectBase.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 class Game;
 

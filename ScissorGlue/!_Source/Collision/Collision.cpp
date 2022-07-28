@@ -6,9 +6,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include "Collision.h"
-#include "DxLib.h"
-#include <sstream>
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 
 // AABBÇÃåç∑îªíË

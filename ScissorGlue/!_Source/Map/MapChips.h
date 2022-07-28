@@ -7,8 +7,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"../picojson/picojson.h"
-#include<string>
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 class Game;
 class ObjectBase;

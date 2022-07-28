@@ -7,9 +7,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include<vector>
-#include<memory>
-#include<DxLib.h>
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 
 class Game;

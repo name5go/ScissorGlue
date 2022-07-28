@@ -8,10 +8,8 @@
 
 #pragma once
 
-#include"../Player/Player.h"
-#include	"../Object/ObjectServer.h"
-#include	"../BackGround/BackGround.h"
-#include	"../Map/MapChips.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 //âÊñ ê›íË
 constexpr auto SCREEN_W = 1280;		//< âÊñ ÇÃâ°âëúìx

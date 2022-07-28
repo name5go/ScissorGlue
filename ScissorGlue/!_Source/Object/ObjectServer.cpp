@@ -6,10 +6,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include<DxLib.h>
-#include"ObjectServer.h"
-#include"ObjectBase.h"
-#include"../Aplication/Game.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 
 //コンストラクタ

@@ -7,9 +7,9 @@
  * \date   July 2022
  *********************************************************************/
 
+#include"../PCH/pch.h"
+#include<winsock.h>
 
-#include "../Math/Math.h"
-#include <string>
 
 // 軸平行境界ボックス(AABB:Axis-Aligned Bounding Box）
 class AABB {

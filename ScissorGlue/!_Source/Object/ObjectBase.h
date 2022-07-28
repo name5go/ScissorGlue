@@ -6,8 +6,10 @@
  * \author めざし
  * \date   July 2022
  *********************************************************************/
+#include"../PCH/pch.h"
+#include<winsock.h>
 
-class Game;
+
 
 //オブジェクトクラス
 class ObjectBase

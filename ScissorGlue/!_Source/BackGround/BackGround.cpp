@@ -6,9 +6,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"DxLib.h"
-#include"BackGround.h"
-#include"../Object/ImageServer.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 //コンストラクタ
 BackGround::BackGround()

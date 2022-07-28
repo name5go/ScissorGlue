@@ -6,6 +6,8 @@
  * \author ‚ß‚´‚µ
  * \date   July 2022
  *********************************************************************/
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 class BackGround
 {

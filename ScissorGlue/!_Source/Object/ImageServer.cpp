@@ -6,8 +6,8 @@
  * \date   July 2022
  *********************************************************************/
 
-#include"DxLib.h"
-#include"ImageServer.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 //Ã“Iƒƒ“ƒoÀ‘Ì
 std::unordered_map<std::string, int>ImageServer::mapGraph;

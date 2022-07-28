@@ -6,12 +6,8 @@
  * \date   June 2022
  *********************************************************************/
 
-#include<DxLib.h>
-#include <stdio.h>
-#include <time.h>
-#include<memory>
-#include"../Aplication/Game.h"
-#include"../Object/ImageServer.h"
+#include"../PCH/pch.h"
+#include<winsock.h>
 
 
 //エントリーポイント
