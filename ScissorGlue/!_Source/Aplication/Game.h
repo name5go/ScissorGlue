@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include"../PCH/pch.h"
+#include"../PCH/stdafx.h"
 #include<winsock.h>
 
 //‰æ–Êİ’è

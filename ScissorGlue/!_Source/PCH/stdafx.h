@@ -1,7 +1,7 @@
 #pragma once
 
 /*****************************************************************//**
- * \file   pch.h
+ * \file   stdafx.h
  * \brief  プリコンパイル済みヘッダ
  *
  * \author めざし
@@ -10,7 +10,7 @@
 
  /**
 	コピペ用
-#include"../PCH/pch.h"
+#include"../PCH/stdafx.h"
 #include<winsock.h>
 
 	*/

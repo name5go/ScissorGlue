@@ -131,7 +131,7 @@
     <ClInclude Include="!_Source\BackGround\BackGround.h">
       <Filter>ヘッダー ファイル\BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="!_Source\PCH\pch.h">
+    <ClInclude Include="!_Source\PCH\stdafx.h">
       <Filter>ヘッダー ファイル\PCH</Filter>
     </ClInclude>
   </ItemGroup>

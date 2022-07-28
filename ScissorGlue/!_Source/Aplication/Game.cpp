@@ -5,7 +5,7 @@
  * \author めざし
  * \date   June 2022a
  *********************************************************************/
-#include"../PCH/pch.h"
+#include"../PCH/stdafx.h"
 #include<winsock.h>
 
  //プレイヤークラスのポインタ生成
