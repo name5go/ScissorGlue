@@ -51,5 +51,4 @@ public:
 	MapChips	_mapChips;
 	// オブジェクトサーバ
 	ObjectServer	_obj;
-
 };

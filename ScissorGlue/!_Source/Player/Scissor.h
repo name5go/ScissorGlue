@@ -9,12 +9,13 @@
 
 #include"../PCH/stdafx.h"
 #include<winsock.h>
-#include"../Object/ObjectBase.h"//オブジェクトベース
+
+
 
 class Scissor:public ObjectBase
 {
 public:
-	Scissor();//コンストラクタ
+	Scissor(Player& p, MapChips& mp);//コンストラクタ
 	~Scissor();//デストラクタ
 	virtual OBJECTTYPE GetType() { return ObjectBase::OBJECTTYPE::SCISSOR; }
 
@@ -22,8 +23,17 @@ public:
 	void Process(Game& g);//計算
 	void Input(Game& g);//入力
 
+	void ScissorPos();
+
+
+	Player& _p;
+	MapChips& _mp;
+	
+
 public:
 	int xCursor; int yCursor;
 	int saveMapChips[2*2]={0,0,0,0};
-
+	int xCutPos;
+	int yCutPos;
+	int CutDekiru;
 };

@@ -10,8 +10,10 @@
 #include"../PCH/stdafx.h"
 #include<winsock.h>
 
+
 class Game;
 class ObjectBase;
+class Scissor;
 
 //マップチップシングル
 class MapChip
@@ -42,6 +44,11 @@ public:
 
 	//ロードジェイソン
 	bool LoadJson(std::string folderpath, std::string filename);
+
+	virtual void Cut(Scissor&s);
+	virtual void Paste(Scissor&s);
+	
+
 
 public:
 	//マップのサイズ（チップ数

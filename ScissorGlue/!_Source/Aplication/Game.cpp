@@ -18,8 +18,8 @@ Game::Game()
 	_mapChips.LoadJson("!_Resources\\!_Pic\\mapchips\\", "map01.json");
 	//各種クラスを追加
 		// プレイヤーを生成し、オブジェクトサーバに登録する
-	_obj.Add(new Player());
-	_obj.Add(new Scissor());
+	_obj.Add(new Player(*this));
+
 }
 
 //デストラクタ

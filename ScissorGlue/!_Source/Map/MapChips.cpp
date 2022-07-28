@@ -21,6 +21,42 @@ MapChips::~MapChips()
 {
 }
 
+void MapChips::Cut(Scissor& s)
+{
+	//MAPSIZE_W* MAPSIZE_H
+//nMap
+//←から5番目と6番目で、↑から3番目と4番目のマップデータを保存してみる
+// 132と133と196と197の値が取りたい値
+	auto a1 = s.yCursor;
+	auto a2 = s.xCursor;
+	s.saveMapChips[0] = vMap[0][s.yCursor][s.xCursor].idMapChip;
+	s.saveMapChips[1] = vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
+	s.saveMapChips[2] = vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
+	s.saveMapChips[3] = vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
+
+	//空白に変える
+	vMap[0][s.yCursor][s.xCursor].idMapChip = 0;
+	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = 0;
+	vMap[0][s.yCursor + 1][s.xCursor].idMapChip = 0;
+	vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip = 0;
+}
+
+
+void MapChips::Paste(Scissor&s)
+{
+	//←から10番目と11番目で、↑から7番目と8番目のマップデータに上書きしてみる
+	vMap[0][s.yCursor][s.xCursor].idMapChip = s.saveMapChips[0];
+	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = s.saveMapChips[1];
+	vMap[0][s.yCursor + 1][s.xCursor].idMapChip = s.saveMapChips[2];
+	vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip = s.saveMapChips[3];
+
+	s.saveMapChips[0] = 0;
+	s.saveMapChips[1] = 0;
+	s.saveMapChips[2] = 0;
+	s.saveMapChips[3] = 0;
+}
+
+
 //計算
 void MapChips::Process(Game& g)
 {
@@ -147,7 +183,7 @@ int MapChips::IsHit(ObjectBase& o, int mx, int my)
 				}
 				if (my < 0)
 				{	// 上に動いていたので、下に補正
-					o.yWorld = y * hChip + hChip - (o.yWorld);
+					o.yWorld = y * hChip + hChip - (o.yHit);
 				}
 				// 当たったので戻る
 				return 1;

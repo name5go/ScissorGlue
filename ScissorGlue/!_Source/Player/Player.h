@@ -16,7 +16,7 @@ class Player:public ObjectBase
 {
 public:
 	//コンストラクタ
-	Player();
+	Player(Game& g);
 	//デストラクタ
 	~Player();
 	virtual OBJECTTYPE GetType() { return ObjectBase::OBJECTTYPE::PLAYER; }
@@ -25,8 +25,12 @@ public:
 	void Process(Game& g);//プロセス
   void CheckInput(Game& g);//入力
 
+	Game& pG;
 
-	void UpdatePlayerPos() { int xPl = xWorld; int yPl = yWorld; }
+
+ int xPl() { return xWorld; }
+ int yPl() { return yWorld; }
+	
 
 public:
 	//左右の向きフラグ1右-1左

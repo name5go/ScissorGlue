@@ -9,8 +9,10 @@
 #include"Player.h"
 
 //コンストラクタ
-Player::Player()
+Player::Player(Game& g):
+	pG(g)
 {
+	pG._obj.Add(new Scissor(*this, pG._mapChips));
 	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換える
 	cgPic[0] = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
 	Init();
@@ -30,8 +32,8 @@ void Player::Init()
 	hPic = 48;
 	xWorld = 32;
 	yWorld = 0;
-	xCamera = wPic / 2;
-	yCamera = hPic + 1;
+	xCamera = -wPic / 2;
+	yCamera = -hPic + 1;
 	besideInertia = 0;
 	verticalInertia = 0;
 	xHit = -16;
@@ -43,7 +45,6 @@ void Player::Init()
 //入力
 void Player::Process(Game& g)
 {
-	UpdatePlayerPos();
 	CheckInput(g);
 	ObjectBase::Process(g);
 
@@ -51,8 +52,6 @@ void Player::Process(Game& g)
 	g._mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
 	g._mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
 	
-
-
 }
 
 void Player::CheckInput(Game& g)
