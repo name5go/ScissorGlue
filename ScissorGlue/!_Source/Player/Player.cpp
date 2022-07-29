@@ -46,6 +46,33 @@ void Player::Init()
 void Player::Process(Game& g)
 {
 	CheckInput(g);
+	xWorld += besideInertia;
+
+	if (besideInertia > 10)
+	{
+		besideInertia = 10;
+	}
+
+	//減速処理
+	if (besideInertia > 0)
+	{
+		g._mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
+		besideInertia -= 1;
+		if (besideInertia > 5)
+		{
+			besideInertia = 5;
+		}
+	}
+	if (besideInertia < 0)
+	{
+		g._mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
+		besideInertia += 1;
+		if (besideInertia < -5)
+		{
+			besideInertia = -5;
+		}
+	}
+
 	ObjectBase::Process(g);
 
 	// 主人公位置からのカメラ座標決定
@@ -67,11 +94,9 @@ void Player::CheckInput(Game& g)
 	//左押されてたら左方向
 	if (g.gKey & PAD_INPUT_LEFT || g.gKey & A_KEY)
 	{
-		LeftRight = -2;
+		LeftRight = -1;
 		//ボタンを押された時の処理
-
-		xWorld -= 2;
-		g._mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
+		besideInertia -= 2;
 	}
 
 	//右押されてたら右方向
@@ -80,12 +105,8 @@ void Player::CheckInput(Game& g)
 		LeftRight = 1;
 		//ボタンを押された時の処理
 		//描画の反転をオン
-
-		xWorld += 2;
-		g._mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
+		besideInertia += 2;
 	}
-	//減速処理
-
 
 	//g.gKey & PAD_INPUT_A ||
 	//ジャンプ

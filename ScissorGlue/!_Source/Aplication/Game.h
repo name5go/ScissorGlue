@@ -15,7 +15,7 @@
 
 //画面設定
 constexpr auto SCREEN_W = 1280;		//< 画面の横解像度
-constexpr auto SCREEN_H = 720;		//< 画面の縦解像度
+constexpr auto SCREEN_H = 360;		//< 画面の縦解像度
 constexpr auto SCREEN_DEPTH = 32;   ///< １ドットあたりのビット数
 
 //ゲームクラス

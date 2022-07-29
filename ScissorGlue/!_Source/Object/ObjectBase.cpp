@@ -63,9 +63,10 @@ void ObjectBase::Draw(Game& g)
 	DrawGraph(x, y, cgPic[(cnt / 8) % cgNum], TRUE);
 
 	// 開発用。当たり判定を表示する
+	/*
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		// 半透明描画指定
 	DrawBox(x + xHit, y + yHit, x + xHit + wHit, y + yHit + hHit, GetColor(255, 0, 0), TRUE);	// 半透明の赤で当たり判定描画
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);		// 不透明描画指定
-
+	*/
 }
 
