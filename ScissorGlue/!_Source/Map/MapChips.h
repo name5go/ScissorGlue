@@ -45,8 +45,16 @@ public:
 	//ロードジェイソン
 	bool LoadJson(std::string folderpath, std::string filename);
 
-	virtual void Cut(Scissor&s);
-	virtual void Paste(Scissor&s);
+	//マップチップ上の切り貼り処理用の関数
+	virtual void Cut(Scissor&s);//切り取り
+	virtual void Paste(Scissor&s);//貼り付け
+
+	//特殊コリジョン用
+
+
+	//マップチップをオブジェクトに変換
+	void	CreateMapChipToObjects(Game& g);
+
 	
 
 

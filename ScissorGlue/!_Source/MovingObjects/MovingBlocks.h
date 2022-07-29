@@ -20,4 +20,13 @@ public:
 	void Init();
 	void Process(Game& g);
 
+	void UpdateCollision();
+
+
+public:
+	int flagLR;
+
+	Vector2 pos;
+	Vector2 size;
+	AABB collision;
 };

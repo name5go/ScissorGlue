@@ -20,6 +20,7 @@ public:
 
 	enum class OBJECTTYPE
 	{
+		NONE,
 		PLAYER,
 		SCISSOR,
 		MOVINGBLOCKS,

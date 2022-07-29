@@ -101,6 +101,69 @@ void MapChips::Draw(Game& g)
 	}
 }
 
+typedef struct {
+	int		collisionType;		// -1:コリジョンなし, 0:通常rect, 1:...
+	ObjectBase::OBJECTTYPE		createObject;		// NONE:無し, ObjectBase::OBJECTTYPE::xxxx オブジェクトを作る場合指定
+} CHIPTYPE;
+static std::map<int, CHIPTYPE> _mapChipType = {
+	// ID(Tiliedベース), CHIPTYPE{}
+	{ 2, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 3, {0,ObjectBase::OBJECTTYPE::MOVINGBLOCKS}},
+	{ 4, {0,ObjectBase::OBJECTTYPE::MOVINGBLOCKS}},
+	{ 7, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 8, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 9, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 10, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 11, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 12, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 13, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 14, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 15, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 16, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 20, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 21, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 22, {0,ObjectBase::OBJECTTYPE::NONE}},
+};
+
+// マップチップからオブジェクトを生成
+void	MapChips::CreateMapChipToObjects(Game& g) {
+	int x, y, layer;
+	for (layer = 0; layer < vMap.size(); layer++)
+	{
+		for (y = 0; y < hMap; y++)
+		{
+			int pos_y = y * hChip - yScr;
+			for (x = 0; x < wMap; x++)
+			{
+				int pos_x = x * wChip - xScr;
+				int chip_no = vMap[layer][y][x].idMapChip;
+				if (_mapChipType.count(chip_no) > 0) {
+					if (_mapChipType[chip_no].createObject != ObjectBase::OBJECTTYPE::NONE) {
+						// この位置にオブジェクトを作る
+						ObjectBase* obj = NULL;
+						switch (_mapChipType[chip_no].createObject) {
+						case ObjectBase::OBJECTTYPE::MOVINGBLOCKS:
+							obj = new MovingBlocks(); break;
+						//case ObjectBase::OBJECTTYPE::ITEM_2:
+							//obj = new Item2(); break;
+						}
+						if (obj != NULL) {
+							// マスの真ん中の位置に
+							obj->xWorld = pos_x + wChip / 2;
+							obj->yWorld = pos_y + hChip / 2;
+							// オブジェクトサーバに登録
+							g._obj.Add(obj);
+						}
+
+						// 作ったので、マップチップ側は透明にする
+						vMap[layer][y][x].idMapChip = 0;
+					}
+				}
+			}
+		}
+	}
+
+}
 
 //マップチップの当たり判定
 //　引数

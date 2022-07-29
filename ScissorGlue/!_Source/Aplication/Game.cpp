@@ -20,6 +20,8 @@ Game::Game()
 		// プレイヤーを生成し、オブジェクトサーバに登録する
 	_obj.Add(new Player(*this));
 
+	// マップチップからオブジェクトを作る
+	_mapChips.CreateMapChipToObjects(*this);
 }
 
 //デストラクタ
