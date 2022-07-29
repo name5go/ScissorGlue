@@ -1,3 +1,7 @@
+ * Copyright 2009-2010 Cybozu Labs, Inc.
+ * Copyright 2011-2014 Kazuho Oku
+ * All rights reserved.
+
 # ScissorGlue
 描画情報の切り貼りを用いてステージ攻略を目指す2D横スクロールゲーム「シザーグルー」の開発リポジトリです。
 
