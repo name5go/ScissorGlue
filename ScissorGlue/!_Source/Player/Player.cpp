@@ -67,9 +67,10 @@ void Player::CheckInput(Game& g)
 	//左押されてたら左方向
 	if (g.gKey & PAD_INPUT_LEFT || g.gKey & A_KEY)
 	{
-		LeftRight = -1;
+		LeftRight = -2;
 		//ボタンを押された時の処理
-		xWorld -= 1;
+
+		xWorld -= 2;
 		g._mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
 	}
 
@@ -79,9 +80,12 @@ void Player::CheckInput(Game& g)
 		LeftRight = 1;
 		//ボタンを押された時の処理
 		//描画の反転をオン
-		xWorld += 1;
+
+		xWorld += 2;
 		g._mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
 	}
+	//減速処理
+
 
 	//g.gKey & PAD_INPUT_A ||
 	//ジャンプ

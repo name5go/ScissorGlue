@@ -23,7 +23,7 @@ public:
 	void Process(Game& g);//ŒvŽZ
 	void Input(Game& g);//“ü—Í
 
-	void ScissorPos();
+	void ScissorPos(Game& g);
 
 
 	Player& _p;

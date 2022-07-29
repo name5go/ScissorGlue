@@ -25,6 +25,7 @@
     <ClCompile Include="!_Source\Collision\Collision.cpp" />
     <ClCompile Include="!_Source\Map\MapChips.cpp" />
     <ClCompile Include="!_Source\Math\Math.cpp" />
+    <ClCompile Include="!_Source\MovingObjects\MovingBlocks.cpp" />
     <ClCompile Include="!_Source\Object\ImageServer.cpp" />
     <ClCompile Include="!_Source\Object\ObjectBase.cpp" />
     <ClCompile Include="!_Source\Object\ObjectServer.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="!_Source\Collision\Collision.h" />
     <ClInclude Include="!_Source\Map\MapChips.h" />
     <ClInclude Include="!_Source\Math\Math.h" />
+    <ClInclude Include="!_Source\MovingObjects\MovingBlocks.h" />
     <ClInclude Include="!_Source\Object\ImageServer.h" />
     <ClInclude Include="!_Source\Object\ObjectBase.h" />
     <ClInclude Include="!_Source\Object\ObjectServer.h" />

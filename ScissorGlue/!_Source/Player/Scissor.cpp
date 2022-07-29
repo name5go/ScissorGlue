@@ -11,7 +11,7 @@
 Scissor::Scissor(Player& p,MapChips& mp)
 	:_p(p),_mp(mp)
 {
-	cgPic[0] = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
+	cgPic[0] = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball2.png");
 	Init();
 }
 //初期化
@@ -40,32 +40,34 @@ Scissor::~Scissor()
 //計算
 void Scissor::Process(Game& g)
 {
-	xWorld = _p.xPl()+_p.LeftRight*50;
+	//ハサミの座標をプレイヤーの座標準拠で更新し続ける
+	xWorld = _p.xPl()+_p.LeftRight*100;
 	yWorld = _p.yPl();
 
-	xCutPos=xWorld + _p.LeftRight * 50;
-	yCutPos = yWorld;
+	//xCutPos=xWorld + _p.LeftRight * 50;
+	//yCutPos = yWorld;
 
-	Input(g);
-	ScissorPos();
+	Input(g);//入力を検知して切り貼りを行う
+	ScissorPos(g);//切り貼り先の座標を計算
 }
-void Scissor::ScissorPos()
+void Scissor::ScissorPos(Game& g)
 {
-	xCursor = xWorld / 40;
-	yCursor = yWorld / 40 - 1;
+	xCursor = xWorld / g._mapChips.wChip;
+	yCursor = yWorld / g._mapChips.wChip - 1;
 }
 
 //入力
 void Scissor::Input(Game& g)
 {
-	if(g.gTrg&PAD_INPUT_1)
+	//Xキーが押されればカット
+	if(g.gTrg&PAD_INPUT_2)
 	{
 		g._mapChips.Cut(*this);
 	}
-	if (g.gTrg&PAD_INPUT_2)
+	//Cキーが押されればコピー
+	if (g.gTrg&PAD_INPUT_3)
 	{
 		g._mapChips.Paste(*this);
 	}
-
 }
 

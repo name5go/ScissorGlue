@@ -22,6 +22,7 @@ public:
 	{
 		PLAYER,
 		SCISSOR,
+		MOVINGBLOCKS,
 	};
 	virtual OBJECTTYPE GetType() = 0;
 
