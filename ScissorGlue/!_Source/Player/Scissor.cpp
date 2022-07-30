@@ -59,6 +59,12 @@ void Scissor::ScissorPos(Game& g)
 //入力
 void Scissor::Input(Game& g)
 {
+	//Zキー押されればカット情報の回転
+	if (g.gTrg & PAD_INPUT_1)
+	{
+		g._mapChips.Rotate(*this);
+	}
+
 	//Xキーが押されればカット
 	if(g.gTrg&PAD_INPUT_2)
 	{
@@ -69,5 +75,7 @@ void Scissor::Input(Game& g)
 	{
 		g._mapChips.Paste(*this);
 	}
+
+
 }
 

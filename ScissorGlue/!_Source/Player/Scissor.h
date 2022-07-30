@@ -31,8 +31,10 @@ public:
 	
 
 public:
-	int xCursor; int yCursor;
-	int saveMapChips[2*2]={0,0,0,0};
+	int xCursor; int yCursor;//Ø‚èæ‚èæ‚ÌêŠ
+	int saveMapChips[2 * 2] = { 0,0,0,0 };//Ø‚èæ‚èî•ñ‚Ìˆê•Û‘¶—p
+	int saveRotateChips[2 * 2] = { 0,0,0,0 };//‰ñ“]—pˆê•Û‘¶
+
 	int xCutPos;
 	int yCutPos;
 	int CutDekiru;

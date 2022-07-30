@@ -1,4 +1,4 @@
-/*****************************************************************//**
+/**************;**************************************************//**
  * \file   MapChips.cpp
  * \brief  マップチップ
  * 
@@ -14,6 +14,8 @@ MapChips::MapChips()
 	//スクロールの値
 	xScr = 0;
 	yScr = 0;
+	//回転角度
+	angleChip = 0;
 }
 
 //マップチップｓのデストラクタ
@@ -21,6 +23,19 @@ MapChips::~MapChips()
 {
 }
 
+//回転
+void MapChips::Rotate(Scissor& s)
+{
+	//回転を実行
+	s.saveMapChips[0] = s.saveRotateChips[2];
+	s.saveMapChips[1] = s.saveRotateChips[0];
+	s.saveMapChips[2] = s.saveRotateChips[3];
+	s.saveMapChips[3] = s.saveRotateChips[1];
+
+	angleChip += 90;
+}
+
+//切り取り
 void MapChips::Cut(Scissor& s)
 {
 	//MAPSIZE_W* MAPSIZE_H
@@ -34,6 +49,13 @@ void MapChips::Cut(Scissor& s)
 	s.saveMapChips[2] = vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
 	s.saveMapChips[3] = vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
 
+	//回転用一時保存先に保存
+	s.saveRotateChips[0]= vMap[0][s.yCursor][s.xCursor].idMapChip;
+	s.saveRotateChips[1]= vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
+	s.saveRotateChips[2]= vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
+	s.saveRotateChips[3]= vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
+
+
 	//空白に変える
 	vMap[0][s.yCursor][s.xCursor].idMapChip = 0;
 	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = 0;
@@ -41,7 +63,7 @@ void MapChips::Cut(Scissor& s)
 	vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip = 0;
 }
 
-
+//貼り付け
 void MapChips::Paste(Scissor&s)
 {
 	//←から10番目と11番目で、↑から7番目と8番目のマップデータに上書きしてみる
@@ -84,7 +106,11 @@ void MapChips::Draw(Game& g)
 				noChip--;
 				if (noChip >= 0)
 				{
-					DrawGraph(xPos, yPos, vCgChip[noChip], TRUE);
+					//回転要素のない画像描画処理いったんコメントアウト
+					//DrawGraph(xPos, yPos, vCgChip[noChip], TRUE);
+		
+					//回転描画用の描画処理(x座標,y座標,拡大率,角度,グラフィックハンドル,透明度の有効化,反転を有効化)
+					DrawRotaGraph(xPos + wChip / 2, yPos + hChip / 2, 1.0, Math::ToRadians(angleChip) , vCgChip[noChip], true, false);
 
 					/// 開発用：このチップは当たり判定を行うものか？
 					if (CheckHit(x, y) != 0)

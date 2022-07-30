@@ -48,6 +48,7 @@ public:
 	//マップチップ上の切り貼り処理用の関数
 	virtual void Cut(Scissor&s);//切り取り
 	virtual void Paste(Scissor&s);//貼り付け
+	virtual void Rotate(Scissor& s);//回転
 
 	//特殊コリジョン用
 
@@ -64,7 +65,10 @@ public:
 	//チップ画像データ
 	int chipCount;
 	int wChipCount, hChipCount;
-	int wChip, hChip;
+	int wChip, hChip;//チップの大きさ
+
+
+	float angleChip;//チップ回転用＿角度
 
 	//スクロール
 	int xScr, yScr;
