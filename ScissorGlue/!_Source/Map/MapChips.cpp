@@ -38,10 +38,6 @@ void MapChips::Rotate(Scissor& s)
 //切り取り
 void MapChips::Cut(Scissor& s)
 {
-	//MAPSIZE_W* MAPSIZE_H
-//nMap
-//←から5番目と6番目で、↑から3番目と4番目のマップデータを保存してみる
-// 132と133と196と197の値が取りたい値
 	auto a1 = s.yCursor;
 	auto a2 = s.xCursor;
 	s.saveMapChips[0] = vMap[0][s.yCursor][s.xCursor].idMapChip;
@@ -66,7 +62,6 @@ void MapChips::Cut(Scissor& s)
 //貼り付け
 void MapChips::Paste(Scissor&s)
 {
-	//←から10番目と11番目で、↑から7番目と8番目のマップデータに上書きしてみる
 	vMap[0][s.yCursor][s.xCursor].idMapChip = s.saveMapChips[0];
 	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = s.saveMapChips[1];
 	vMap[0][s.yCursor + 1][s.xCursor].idMapChip = s.saveMapChips[2];

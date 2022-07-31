@@ -46,8 +46,8 @@ public:
 	bool LoadJson(std::string folderpath, std::string filename);
 
 	//マップチップ上の切り貼り処理用の関数
-	virtual void Cut(Scissor&s);//切り取り
-	virtual void Paste(Scissor&s);//貼り付け
+	virtual void Cut(Scissor& s);//切り取り
+	virtual void Paste(Scissor& s);//貼り付け
 	virtual void Rotate(Scissor& s);//回転
 
 	//特殊コリジョン用
@@ -56,7 +56,7 @@ public:
 	//マップチップをオブジェクトに変換
 	void	CreateMapChipToObjects(Game& g);
 
-	
+
 
 
 public:
