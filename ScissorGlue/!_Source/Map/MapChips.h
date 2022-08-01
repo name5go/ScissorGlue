@@ -19,8 +19,11 @@ class Scissor;
 class MapChip
 {
 public:
+	MapChip();
+
 	//チップID
 	int idMapChip;
+	float angleChip;//チップ回転用＿角度
 };
 
 //マップチップsクラス
@@ -48,7 +51,8 @@ public:
 	//マップチップ上の切り貼り処理用の関数
 	virtual void Cut(Scissor& s);//切り取り
 	virtual void Paste(Scissor& s);//貼り付け
-	virtual void Rotate(Scissor& s);//回転
+	virtual void AngleRotation(Scissor& s);//角度回転
+	virtual void PlacemnetRotation(Scissor& s);//配置回転
 
 	//特殊コリジョン用
 
@@ -68,7 +72,7 @@ public:
 	int wChip, hChip;//チップの大きさ
 
 
-	float angleChip;//チップ回転用＿角度
+	
 
 	//スクロール
 	int xScr, yScr;

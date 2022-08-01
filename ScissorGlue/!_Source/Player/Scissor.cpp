@@ -62,7 +62,8 @@ void Scissor::Input(Game& g)
 	//Zキー押されればカット情報の回転
 	if (g.gTrg & PAD_INPUT_1)
 	{
-		g._mapChips.Rotate(*this);
+		g._mapChips.AngleRotation(*this);
+		g._mapChips.PlacemnetRotation(*this);
 	}
 
 	//Xキーが押されればカット

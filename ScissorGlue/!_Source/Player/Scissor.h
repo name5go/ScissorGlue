@@ -32,8 +32,8 @@ public:
 
 public:
 	int xCursor; int yCursor;//切り取り先の場所
-	int saveMapChips[2 * 2] = { 0,0,0,0 };//切り取り情報の一時保存用
-	int saveRotateChips[2 * 2] = { 0,0,0,0 };//回転用一時保存
+	MapChip saveMapChips[2 * 2]; //切り取り情報の一時保存用
+	MapChip saveRotateChips[2 * 2];//回転用一時保存
 
 	int xCutPos;
 	int yCutPos;

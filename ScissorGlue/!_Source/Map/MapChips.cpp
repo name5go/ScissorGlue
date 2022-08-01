@@ -7,15 +7,20 @@
  *********************************************************************/
 
 #include"MapChips.h"
+MapChip::MapChip()
+{
+	idMapChip=0;
+	angleChip=0;//チップ回転用＿角度
+}
+
 
 //マップチップｓクラスのコンストラクタ
 MapChips::MapChips()
 {
+	
 	//スクロールの値
 	xScr = 0;
 	yScr = 0;
-	//回転角度
-	angleChip = 0;
 }
 
 //マップチップｓのデストラクタ
@@ -24,32 +29,44 @@ MapChips::~MapChips()
 }
 
 //回転
-void MapChips::Rotate(Scissor& s)
+void MapChips::AngleRotation(Scissor& s)
 {
-	//回転を実行
+	//角度の回転を実行
+	s.saveRotateChips[0].angleChip += 90;
+	s.saveRotateChips[1].angleChip += 90;
+	s.saveRotateChips[2].angleChip += 90;
+	s.saveRotateChips[3].angleChip += 90;
+}
+void MapChips::PlacemnetRotation(Scissor& s)
+{
+	//配置の回転を実行
 	s.saveMapChips[0] = s.saveRotateChips[2];
 	s.saveMapChips[1] = s.saveRotateChips[0];
 	s.saveMapChips[2] = s.saveRotateChips[3];
 	s.saveMapChips[3] = s.saveRotateChips[1];
-
-	angleChip += 90;
+	//配置回転後の情報を保存
+	s.saveRotateChips[0] = s.saveMapChips[0];
+	s.saveRotateChips[1] = s.saveMapChips[1];
+	s.saveRotateChips[2] = s.saveMapChips[2];
+	s.saveRotateChips[3] = s.saveMapChips[3];
 }
+
 
 //切り取り
 void MapChips::Cut(Scissor& s)
 {
 	auto a1 = s.yCursor;
 	auto a2 = s.xCursor;
-	s.saveMapChips[0] = vMap[0][s.yCursor][s.xCursor].idMapChip;
-	s.saveMapChips[1] = vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
-	s.saveMapChips[2] = vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
-	s.saveMapChips[3] = vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
+	s.saveMapChips[0].idMapChip = vMap[0][s.yCursor][s.xCursor].idMapChip;
+	s.saveMapChips[1].idMapChip = vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
+	s.saveMapChips[2].idMapChip = vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
+	s.saveMapChips[3].idMapChip = vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
 
 	//回転用一時保存先に保存
-	s.saveRotateChips[0]= vMap[0][s.yCursor][s.xCursor].idMapChip;
-	s.saveRotateChips[1]= vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
-	s.saveRotateChips[2]= vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
-	s.saveRotateChips[3]= vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
+	s.saveRotateChips[0].idMapChip= vMap[0][s.yCursor][s.xCursor].idMapChip;
+	s.saveRotateChips[1].idMapChip= vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
+	s.saveRotateChips[2].idMapChip= vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
+	s.saveRotateChips[3].idMapChip= vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
 
 
 	//空白に変える
@@ -62,15 +79,26 @@ void MapChips::Cut(Scissor& s)
 //貼り付け
 void MapChips::Paste(Scissor&s)
 {
-	vMap[0][s.yCursor][s.xCursor].idMapChip = s.saveMapChips[0];
-	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = s.saveMapChips[1];
-	vMap[0][s.yCursor + 1][s.xCursor].idMapChip = s.saveMapChips[2];
-	vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip = s.saveMapChips[3];
+	vMap[0][s.yCursor][s.xCursor].idMapChip = s.saveMapChips[0].idMapChip;
+	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = s.saveMapChips[1].idMapChip;
+	vMap[0][s.yCursor + 1][s.xCursor].idMapChip = s.saveMapChips[2].idMapChip;
+	vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip = s.saveMapChips[3].idMapChip;
 
-	s.saveMapChips[0] = 0;
-	s.saveMapChips[1] = 0;
-	s.saveMapChips[2] = 0;
-	s.saveMapChips[3] = 0;
+	vMap[0][s.yCursor][s.xCursor].angleChip = s.saveMapChips[0].angleChip;
+	vMap[0][s.yCursor][s.xCursor + 1].angleChip = s.saveMapChips[1].angleChip;
+	vMap[0][s.yCursor + 1][s.xCursor].angleChip = s.saveMapChips[2].angleChip;
+	vMap[0][s.yCursor + 1][s.xCursor + 1].angleChip = s.saveMapChips[3].angleChip;
+
+
+	s.saveMapChips[0].idMapChip = 0;
+	s.saveMapChips[1].idMapChip = 0;
+	s.saveMapChips[2].idMapChip = 0;
+	s.saveMapChips[3].idMapChip = 0;
+
+	s.saveMapChips[0].angleChip = 0;
+	s.saveMapChips[1].angleChip = 0;
+	s.saveMapChips[2].angleChip = 0;
+	s.saveMapChips[3].angleChip = 0;
 }
 
 
@@ -105,8 +133,18 @@ void MapChips::Draw(Game& g)
 					//DrawGraph(xPos, yPos, vCgChip[noChip], TRUE);
 		
 					//回転描画用の描画処理(x座標,y座標,拡大率,角度,グラフィックハンドル,透明度の有効化,反転を有効化)
-					DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(angleChip) , vCgChip[noChip], true, false);
+					DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(vMap[layer][y][x].angleChip) , vCgChip[noChip], true, false);
 
+					/**
+					if (vMap[layer][y][x].angleChip != 0)
+					{
+						DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(vMap[layer][y][x].angleChip), vCgChip[noChip], true, false);
+					}
+					else
+					{
+						DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(vMap[layer][y][x].angleChip), vCgChip[noChip], true, false);
+					}
+					*/
 					/// 開発用：このチップは当たり判定を行うものか？
 					if (CheckHit(x, y) != 0)
 					{
