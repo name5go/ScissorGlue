@@ -64,6 +64,12 @@
     <Filter Include="ヘッダー ファイル\picojson">
       <UniqueIdentifier>{4be880a3-0981-426b-aec4-d7f5746fa1ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MovingObjects">
+      <UniqueIdentifier>{65b71608-807b-4669-9588-ed68d4afef20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MovingObjects">
+      <UniqueIdentifier>{6c9c05f2-3b41-4515-91fa-489ce46900e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="!_Source\Aplication\Winmain.cpp">
@@ -105,6 +111,9 @@
     <ClCompile Include="!_Source\Player\Scissor.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="!_Source\MovingObjects\MovingBlocks.cpp">
+      <Filter>ソース ファイル\MovingObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="!_Source\Aplication\Game.h">
@@ -145,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="!_Source\Player\Scissor.h">
       <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="!_Source\MovingObjects\MovingBlocks.h">
+      <Filter>ヘッダー ファイル\MovingObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

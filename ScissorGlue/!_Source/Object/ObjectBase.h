@@ -20,8 +20,10 @@ public:
 
 	enum class OBJECTTYPE
 	{
+		NONE,
 		PLAYER,
 		SCISSOR,
+		MOVINGBLOCKS,
 	};
 	virtual OBJECTTYPE GetType() = 0;
 
@@ -62,8 +64,7 @@ public:
 	
 	//接地フラグ0空中1地上
 	int standFlag;
-	//左右の向きフラグ1右-1左
-	int LeftRight;
+	
 	
 	//当たり判定用
 	int xHit, yHit;

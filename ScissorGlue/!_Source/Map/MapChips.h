@@ -10,15 +10,20 @@
 #include"../PCH/stdafx.h"
 #include<winsock.h>
 
+
 class Game;
 class ObjectBase;
+class Scissor;
 
 //マップチップシングル
 class MapChip
 {
 public:
+	MapChip();
+
 	//チップID
 	int idMapChip;
+	float angleChip;//チップ回転用＿角度
 };
 
 //マップチップsクラス
@@ -43,13 +48,31 @@ public:
 	//ロードジェイソン
 	bool LoadJson(std::string folderpath, std::string filename);
 
+	//マップチップ上の切り貼り処理用の関数
+	virtual void Cut(Scissor& s);//切り取り
+	virtual void Paste(Scissor& s);//貼り付け
+	virtual void AngleRotation(Scissor& s);//角度回転
+	virtual void PlacemnetRotation(Scissor& s);//配置回転
+
+	//特殊コリジョン用
+
+
+	//マップチップをオブジェクトに変換
+	void	CreateMapChipToObjects(Game& g);
+
+
+
+
 public:
 	//マップのサイズ（チップ数
 	int wMap, hMap;
 	//チップ画像データ
 	int chipCount;
 	int wChipCount, hChipCount;
-	int wChip, hChip;
+	int wChip, hChip;//チップの大きさ
+
+
+	
 
 	//スクロール
 	int xScr, yScr;

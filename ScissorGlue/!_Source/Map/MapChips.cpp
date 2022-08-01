@@ -1,4 +1,4 @@
-/*****************************************************************//**
+/**************;**************************************************//**
  * \file   MapChips.cpp
  * \brief  マップチップ
  * 
@@ -7,10 +7,17 @@
  *********************************************************************/
 
 #include"MapChips.h"
+MapChip::MapChip()
+{
+	idMapChip=0;
+	angleChip=0;//チップ回転用＿角度
+}
+
 
 //マップチップｓクラスのコンストラクタ
 MapChips::MapChips()
 {
+	
 	//スクロールの値
 	xScr = 0;
 	yScr = 0;
@@ -20,6 +27,80 @@ MapChips::MapChips()
 MapChips::~MapChips()
 {
 }
+
+//回転
+void MapChips::AngleRotation(Scissor& s)
+{
+	//角度の回転を実行
+	s.saveRotateChips[0].angleChip += 90;
+	s.saveRotateChips[1].angleChip += 90;
+	s.saveRotateChips[2].angleChip += 90;
+	s.saveRotateChips[3].angleChip += 90;
+}
+void MapChips::PlacemnetRotation(Scissor& s)
+{
+	//配置の回転を実行
+	s.saveMapChips[0] = s.saveRotateChips[2];
+	s.saveMapChips[1] = s.saveRotateChips[0];
+	s.saveMapChips[2] = s.saveRotateChips[3];
+	s.saveMapChips[3] = s.saveRotateChips[1];
+	//配置回転後の情報を保存
+	s.saveRotateChips[0] = s.saveMapChips[0];
+	s.saveRotateChips[1] = s.saveMapChips[1];
+	s.saveRotateChips[2] = s.saveMapChips[2];
+	s.saveRotateChips[3] = s.saveMapChips[3];
+}
+
+
+//切り取り
+void MapChips::Cut(Scissor& s)
+{
+	auto a1 = s.yCursor;
+	auto a2 = s.xCursor;
+	s.saveMapChips[0].idMapChip = vMap[0][s.yCursor][s.xCursor].idMapChip;
+	s.saveMapChips[1].idMapChip = vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
+	s.saveMapChips[2].idMapChip = vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
+	s.saveMapChips[3].idMapChip = vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
+
+	//回転用一時保存先に保存
+	s.saveRotateChips[0].idMapChip= vMap[0][s.yCursor][s.xCursor].idMapChip;
+	s.saveRotateChips[1].idMapChip= vMap[0][s.yCursor][s.xCursor + 1].idMapChip;
+	s.saveRotateChips[2].idMapChip= vMap[0][s.yCursor + 1][s.xCursor].idMapChip;
+	s.saveRotateChips[3].idMapChip= vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip;
+
+
+	//空白に変える
+	vMap[0][s.yCursor][s.xCursor].idMapChip = 0;
+	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = 0;
+	vMap[0][s.yCursor + 1][s.xCursor].idMapChip = 0;
+	vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip = 0;
+}
+
+//貼り付け
+void MapChips::Paste(Scissor&s)
+{
+	vMap[0][s.yCursor][s.xCursor].idMapChip = s.saveMapChips[0].idMapChip;
+	vMap[0][s.yCursor][s.xCursor + 1].idMapChip = s.saveMapChips[1].idMapChip;
+	vMap[0][s.yCursor + 1][s.xCursor].idMapChip = s.saveMapChips[2].idMapChip;
+	vMap[0][s.yCursor + 1][s.xCursor + 1].idMapChip = s.saveMapChips[3].idMapChip;
+
+	vMap[0][s.yCursor][s.xCursor].angleChip = s.saveMapChips[0].angleChip;
+	vMap[0][s.yCursor][s.xCursor + 1].angleChip = s.saveMapChips[1].angleChip;
+	vMap[0][s.yCursor + 1][s.xCursor].angleChip = s.saveMapChips[2].angleChip;
+	vMap[0][s.yCursor + 1][s.xCursor + 1].angleChip = s.saveMapChips[3].angleChip;
+
+
+	s.saveMapChips[0].idMapChip = 0;
+	s.saveMapChips[1].idMapChip = 0;
+	s.saveMapChips[2].idMapChip = 0;
+	s.saveMapChips[3].idMapChip = 0;
+
+	s.saveMapChips[0].angleChip = 0;
+	s.saveMapChips[1].angleChip = 0;
+	s.saveMapChips[2].angleChip = 0;
+	s.saveMapChips[3].angleChip = 0;
+}
+
 
 //計算
 void MapChips::Process(Game& g)
@@ -48,8 +129,22 @@ void MapChips::Draw(Game& g)
 				noChip--;
 				if (noChip >= 0)
 				{
-					DrawGraph(xPos, yPos, vCgChip[noChip], TRUE);
+					//回転要素のない画像描画処理いったんコメントアウト
+					//DrawGraph(xPos, yPos, vCgChip[noChip], TRUE);
+		
+					//回転描画用の描画処理(x座標,y座標,拡大率,角度,グラフィックハンドル,透明度の有効化,反転を有効化)
+					DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(vMap[layer][y][x].angleChip) , vCgChip[noChip], true, false);
 
+					/**
+					if (vMap[layer][y][x].angleChip != 0)
+					{
+						DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(vMap[layer][y][x].angleChip), vCgChip[noChip], true, false);
+					}
+					else
+					{
+						DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(vMap[layer][y][x].angleChip), vCgChip[noChip], true, false);
+					}
+					*/
 					/// 開発用：このチップは当たり判定を行うものか？
 					if (CheckHit(x, y) != 0)
 					{
@@ -65,6 +160,69 @@ void MapChips::Draw(Game& g)
 	}
 }
 
+typedef struct {
+	int		collisionType;		// -1:コリジョンなし, 0:通常rect, 1:...
+	ObjectBase::OBJECTTYPE		createObject;		// NONE:無し, ObjectBase::OBJECTTYPE::xxxx オブジェクトを作る場合指定
+} CHIPTYPE;
+static std::map<int, CHIPTYPE> _mapChipType = {
+	// ID(Tiliedベース), CHIPTYPE{}
+	{ 2, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 3, {0,ObjectBase::OBJECTTYPE::MOVINGBLOCKS}},
+	{ 4, {0,ObjectBase::OBJECTTYPE::MOVINGBLOCKS}},
+	{ 7, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 8, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 9, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 10, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 11, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 12, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 13, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 14, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 15, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 16, {1,ObjectBase::OBJECTTYPE::NONE}},
+	{ 20, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 21, {0,ObjectBase::OBJECTTYPE::NONE}},
+	{ 22, {0,ObjectBase::OBJECTTYPE::NONE}},
+};
+
+// マップチップからオブジェクトを生成
+void	MapChips::CreateMapChipToObjects(Game& g) {
+	int x, y, layer;
+	for (layer = 0; layer < vMap.size(); layer++)
+	{
+		for (y = 0; y < hMap; y++)
+		{
+			int pos_y = y * hChip - yScr;
+			for (x = 0; x < wMap; x++)
+			{
+				int pos_x = x * wChip - xScr;
+				int chip_no = vMap[layer][y][x].idMapChip;
+				if (_mapChipType.count(chip_no) > 0) {
+					if (_mapChipType[chip_no].createObject != ObjectBase::OBJECTTYPE::NONE) {
+						// この位置にオブジェクトを作る
+						ObjectBase* obj = NULL;
+						switch (_mapChipType[chip_no].createObject) {
+						case ObjectBase::OBJECTTYPE::MOVINGBLOCKS:
+							obj = new MovingBlocks(); break;
+						//case ObjectBase::OBJECTTYPE::ITEM_2:
+							//obj = new Item2(); break;
+						}
+						if (obj != NULL) {
+							// マスの真ん中の位置に
+							obj->xWorld = pos_x + wChip / 2;
+							obj->yWorld = pos_y + hChip / 2;
+							// オブジェクトサーバに登録
+							g._obj.Add(obj);
+						}
+
+						// 作ったので、マップチップ側は透明にする
+						vMap[layer][y][x].idMapChip = 0;
+					}
+				}
+			}
+		}
+	}
+
+}
 
 //マップチップの当たり判定
 //　引数
@@ -147,7 +305,7 @@ int MapChips::IsHit(ObjectBase& o, int mx, int my)
 				}
 				if (my < 0)
 				{	// 上に動いていたので、下に補正
-					o.yWorld = y * hChip + hChip - (o.yWorld);
+					o.yWorld = y * hChip + hChip - (o.yHit);
 				}
 				// 当たったので戻る
 				return 1;

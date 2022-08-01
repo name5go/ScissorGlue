@@ -23,7 +23,7 @@ void ImageServer::Init()
 //‰ğ•ú
 void ImageServer::Release()
 {
-	ClearGraph;
+	ClearGraph();
 }
 
 //Á‚·‚â‚Â

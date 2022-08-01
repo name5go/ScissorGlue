@@ -9,8 +9,10 @@
 #include"Player.h"
 
 //コンストラクタ
-Player::Player()
+Player::Player(Game& g):
+	pG(g)
 {
+	pG._obj.Add(new Scissor(*this, pG._mapChips));
 	//画像の読み込み___後でイメージサーバーのハンドル取得に書き換える
 	cgPic[0] = ImageServer::LoadGraph("!_Resources\\!_Pic\\player\\ball.png");
 	Init();
@@ -30,8 +32,8 @@ void Player::Init()
 	hPic = 48;
 	xWorld = 32;
 	yWorld = 0;
-	xCamera = wPic / 2;
-	yCamera = hPic + 1;
+	xCamera = -wPic / 2;
+	yCamera = -hPic + 1;
 	besideInertia = 0;
 	verticalInertia = 0;
 	xHit = -16;
@@ -43,16 +45,40 @@ void Player::Init()
 //入力
 void Player::Process(Game& g)
 {
-
 	CheckInput(g);
+	xWorld += besideInertia;
+
+	if (besideInertia > 10)
+	{
+		besideInertia = 10;
+	}
+
+	//減速処理
+	if (besideInertia > 0)
+	{
+		g._mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
+		besideInertia -= 1;
+		if (besideInertia > 5)
+		{
+			besideInertia = 5;
+		}
+	}
+	if (besideInertia < 0)
+	{
+		g._mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
+		besideInertia += 1;
+		if (besideInertia < -5)
+		{
+			besideInertia = -5;
+		}
+	}
+
 	ObjectBase::Process(g);
 
 	// 主人公位置からのカメラ座標決定
 	g._mapChips.xScr = xWorld - (SCREEN_W / 2);		// 画面の横中央にキャラを置く
 	g._mapChips.yScr = yWorld - (SCREEN_H * 7 / 10);	// 画面の縦70%にキャラを置く
 	
-
-
 }
 
 void Player::CheckInput(Game& g)
@@ -70,8 +96,7 @@ void Player::CheckInput(Game& g)
 	{
 		LeftRight = -1;
 		//ボタンを押された時の処理
-		xWorld -= 1;
-		g._mapChips.IsHit(*this, -1, 0);		// 左に動いたので、x移動方向をマイナス指定
+		besideInertia -= 2;
 	}
 
 	//右押されてたら右方向
@@ -80,8 +105,7 @@ void Player::CheckInput(Game& g)
 		LeftRight = 1;
 		//ボタンを押された時の処理
 		//描画の反転をオン
-		xWorld += 1;
-		g._mapChips.IsHit(*this, 1, 0);			// 右に動いたので、x移動方向をプラス指定
+		besideInertia += 2;
 	}
 
 	//g.gKey & PAD_INPUT_A ||

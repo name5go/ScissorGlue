@@ -38,6 +38,8 @@
 #include"../Map/MapChips.h"//マップチップヘッダー
 #include"../Math/Math.h"//MATHヘッダー
 #include"../Player/Player.h"//プレイヤー
+#include"../Player/Scissor.h"//ハサミ
+#include"../MovingObjects/MovingBlocks.h"//動く床
 
 //object関連のヘッダー
 #include"../Object/ImageServer.h"//イメージサーバーのヘッダー
