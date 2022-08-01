@@ -105,7 +105,7 @@ void MapChips::Draw(Game& g)
 					//DrawGraph(xPos, yPos, vCgChip[noChip], TRUE);
 		
 					//回転描画用の描画処理(x座標,y座標,拡大率,角度,グラフィックハンドル,透明度の有効化,反転を有効化)
-					DrawRotaGraph(xPos + wChip / 2, yPos + hChip / 2, 1.0, Math::ToRadians(angleChip) , vCgChip[noChip], true, false);
+					DrawRotaGraph(xPos + (wChip / 2), yPos + (hChip / 2), 1.0, Math::ToRadians(angleChip) , vCgChip[noChip], true, false);
 
 					/// 開発用：このチップは当たり判定を行うものか？
 					if (CheckHit(x, y) != 0)
